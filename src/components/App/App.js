@@ -10,8 +10,7 @@ function App() {
     <div className="root">
       <div className="page">
         <Header />
-        <Main>
-        </Main>
+        <Main />
         <Footer />
         {/* <Route path="/"></Route>
         <Route path="/saved-news"></Route> */}

@@ -3,7 +3,9 @@
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    margin: auto 104px;
+    padding: 0 104px;
+    background: rgba(196, 196, 196, 0.01);
+    box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
 }
 
 .header__logo {
@@ -51,4 +53,5 @@
     height: 16px;
     width: 18px;
     background: url('../../images/icon/arrow.svg') no-repeat;
+    margin-left: 10px;
 }
