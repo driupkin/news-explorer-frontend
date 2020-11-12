@@ -1,5 +1,6 @@
 import React from 'react';
 import './Main.css';
+import Preloader from '../Preloader/Preloader';
 
 function Main() {
     return (
@@ -13,6 +14,9 @@ function Main() {
                         <button className="search__button">Искать</button>
                     </fieldset>
                 </div>
+            </section>
+            <section className="preloader">
+                <Preloader />
             </section>
             <section className="author">
                 <img className="author__avatar" alt="Аватар" src="https://www.cossa.ru/upload/main/a07/b758a5110a809c48845502fcd7e8100f_unnamed-_1_.jpg" />

@@ -1,0 +1,22 @@
+.circle-preloader {
+    display: block;
+    width: 74px;
+    height: 74px;
+    border: 1px solid transparent;
+    border-bottom-color: #F5F6F7;
+    background: linear-gradient(#F5F6F7, #F5F6F7) padding-box, linear-gradient(245deg, #1A1B22 25%, #D1D2D6 60%, #F5F6F7 75%) border-box;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    animation: spin .75s infinite linear;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
