@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header />
         <Main />
         <Footer />
+        <PopupWithForm />
         {/* <Route path="/"></Route>
         <Route path="/saved-news"></Route> */}
       </div>
