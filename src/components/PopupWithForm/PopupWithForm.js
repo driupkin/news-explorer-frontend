@@ -8,17 +8,20 @@ function PopupWithForm(props) {
         { inputName: "Имя" }
     ];
     return (
-        <section className="popup">
+        <section className={`popup ${props.isOpen ? 'popup_opened' : ''}`}>
             <div className="popup__container">
-                <button className="popup__button"></button>
+                <button
+                    className="popup__button"
+                    onClick={props.onClose}
+                ></button>
                 <h2 className="popup__title">Вход</h2>
                 <form className="form">
                     <fieldset className="form__field">
                         {inputs.map((e, i) => {
                             return (
-                                <div className="form__input-container">
-                                    <h2 className="form__title" key={i}>{e.inputName}</h2>
-                                    <input className="form__input" key={i} />
+                                <div className="form__input-container" key={i}>
+                                    <h2 className="form__title" >{e.inputName}</h2>
+                                    <input className="form__input" />
                                 </div>
                             )
                         })}
