@@ -8,11 +8,20 @@
     box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
 }
 
+.header_theme_white {
+    background: #FFFFFF;
+    box-shadow: inset 0px -1px 0px #D1D2D6;
+}
+
 .header__logo {
     height: 24px;
     width: 200px;
     background: url('../../images/logo/NewsExplorer.svg') no-repeat;
     background-size: contain;
+}
+
+.header__logo_theme_white {
+    background: url('../../images/logo/NewsExplorer-black.svg') no-repeat center;
 }
 
 .header__link {
@@ -27,6 +36,10 @@
     text-align: center;
     color: #FFFFFF;
     margin-right: 34px;
+}
+
+.header__link_theme_white {
+    color: #1A1B22;
 }
 
 .header__button {
@@ -50,6 +63,11 @@
     padding: 0 19px;
 }
 
+.header__button_theme_white {
+    color: #1A1B22;
+    border: 1px solid #1A1B22;
+}
+
 .header__button-icon {
     display: none;
     height: 16px;
@@ -60,4 +78,8 @@
 
 .header__button-icon_authorized {
     display: block;
+}
+
+.header__button-icon_theme_white {
+    background: url('../../images/icon/arrow-black.svg') no-repeat center;
 }

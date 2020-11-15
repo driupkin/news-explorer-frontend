@@ -3,13 +3,15 @@ import './Main.css';
 import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
+import NewsCardList from '../NewsCardList/NewsCardList';
 
-function Main() {
+function Main(props) {
     return (
         <main className="content">
             <SearchForm />
-            <section className="elements">
-            </section>
+            <NewsCardList 
+            cards={props.cards}
+            />           
             <Preloader />
             <About />
         </main>
