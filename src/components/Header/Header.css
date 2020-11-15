@@ -51,8 +51,13 @@
 }
 
 .header__button-icon {
+    display: none;
     height: 16px;
     width: 18px;
     background: url('../../images/icon/arrow.svg') no-repeat;
     margin-left: 10px;
+}
+
+.header__button-icon_authorized {
+    display: block;
 }

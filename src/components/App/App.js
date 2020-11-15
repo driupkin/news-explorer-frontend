@@ -9,7 +9,9 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 function App() {
 
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState();
-const [HeaderButtonName, setHeaderButtonName] =useState('Авторизоваться');
+  const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
+  const [isAuthorized, setIsAuthorized] = useState();
+
   useEffect(() => {
     function closeAllPopupsByOverlay(e) {
       if (e.target.classList.contains('popup_opened'))
@@ -45,6 +47,7 @@ const [HeaderButtonName, setHeaderButtonName] =useState('Авторизоват�
         <PopupWithForm
           onClose={closeAllPopups}
           isOpen={isLoginPopupOpen}
+          isAuthorized={isAuthorized}
         />
         {/* <Route path="/"></Route>
         <Route path="/saved-news"></Route> */}

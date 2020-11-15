@@ -14,7 +14,7 @@ function PopupWithForm(props) {
                     className="popup__button"
                     onClick={props.onClose}
                 ></button>
-                <h2 className="popup__title">Вход</h2>
+                <h2 className="popup__title">{props.tiltle}</h2>
                 <form className="form">
                     <fieldset className="form__field">
                         {inputs.map((e, i) => {
@@ -22,6 +22,7 @@ function PopupWithForm(props) {
                                 <div className="form__input-container" key={i}>
                                     <h2 className="form__title" >{e.inputName}</h2>
                                     <input className="form__input" />
+                                    <span className='form__input-error' id={`${e.inputName}-input-error`}></span>
                                 </div>
                             )
                         })}

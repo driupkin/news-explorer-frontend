@@ -9,11 +9,13 @@ function Header(props) {
             <Navigation>
                 <a href="/" className="header__link" target="blank">Главная</a>
                 <a href="/" className="header__link" target="blank">Сохранённые статьи</a>
-                <button 
-                className="header__button"
-                onClick={props.onClick}
+                <button
+                    className="header__button"
+                    onClick={props.onClick}
                 >{props.buttonName}
-                    <div className="header__button-icon"></div>
+                    <div
+                        className={`header__button-icon ${props.isAuthorized ? 'header__button-icon_authorized' : ''}`}>
+                    </div>
                 </button>
 
             </Navigation>

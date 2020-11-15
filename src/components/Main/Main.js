@@ -8,6 +8,8 @@ function Main() {
     return (
         <main className="content">
             <SearchForm />
+            <section className="elements">
+            </section>
             <Preloader />
             <About />
         </main>
