@@ -1,12 +1,37 @@
-.author {
+.author-data {
     background: #FFFFFF;
+    padding: 40px 104px 56px;
+    box-sizing: border-box;
 }
 
-.author__title {
+.author-data__title {
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 24px;
     color: rgba(26, 27, 34, 0.5);
+    margin: 0;
+}
+
+.author-data__articles {
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 46px;
+    color: #1A1B22;
+    width: 530px;
+    height: 92px;
+    margin: 30px 0;
+}
+
+.author-data__subtitle {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1A1B22;
+    margin: 0;
 }
