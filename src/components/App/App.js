@@ -11,7 +11,7 @@ function App() {
 
   const cards = [
     {
-    keyWord: "Старая Ладога",
+    keyWord: "Ладога",
     date: "2 августа, 2019",
     title: "Национальное достояние – парки",
     paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
@@ -46,7 +46,7 @@ function App() {
   const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
   const [isAuthorized, setIsAuthorized] = useState(true);
   const [isCardsVisible, setIsCardsVisible] = useState();
-  const [foundCards, setFoundCards] = useState();
+  const [foundCards, setFoundCards] = useState([]);
 
   useEffect(() => {
     function closeAllPopupsByOverlay(e) {
@@ -81,7 +81,7 @@ function App() {
     const foundCards = cards.filter((card) => {
       console.log(keyWord);
 
-      setIsCardsVisible(true);
+      // setIsCardsVisible(true);
       return card.keyWord === keyWord;
 
     }); console.log(foundCards);

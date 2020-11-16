@@ -3,17 +3,23 @@ import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
 
 function NewsCardList(props) {
-    return (
-        <section className={`elements ${props.isVisible ? 'elements_show' : ''}`}>
-            {props.cards ? props.cards.map((card, i) => (
-                <NewsCard
-                    isSevedNews={props.isSevedNews}
-                    card={card}
-                    key={i}
-                />
-            )) : ''}
+    return (<div>
+        {props.cards.length !== 0
+            ? <section className="elements">
+                {props.children}
+                <div className="elements__container">
+                    {props.cards.map((card, i) => (
+                        <NewsCard
+                            isSevedNews={props.isSevedNews}
+                            card={card}
+                            key={i}
+                        />
+                    ))}
 
-        </section>
+                </div>
+            </section>
+            : ''}
+    </div>
     )
 }
 
