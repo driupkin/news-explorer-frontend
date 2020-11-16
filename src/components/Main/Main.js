@@ -8,8 +8,11 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 function Main(props) {
     return (
         <main className="content">
-            <SearchForm />
+            <SearchForm 
+            searchWord={props.searchByKeyword}
+            />
             <NewsCardList 
+            isVisible={props.isCardsVisible}
             cards={props.cards}
             />           
             <Preloader />

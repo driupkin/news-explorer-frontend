@@ -9,7 +9,8 @@ import SavedNews from '../SavedNews/SavedNews';
 
 function App() {
 
-  const cards = [{
+  const cards = [
+    {
     keyWord: "Старая Ладога",
     date: "2 августа, 2019",
     title: "Национальное достояние – парки",
@@ -36,13 +37,16 @@ function App() {
     title: "Национальное достояние – парки",
     paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
     subtitle: "Дзен",
-  }]
+  }
+]
 
   const user = { name: "Стасон" }
 
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState();
   const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
   const [isAuthorized, setIsAuthorized] = useState(true);
+  const [isCardsVisible, setIsCardsVisible] = useState();
+  const [foundCards, setFoundCards] = useState();
 
   useEffect(() => {
     function closeAllPopupsByOverlay(e) {
@@ -73,6 +77,17 @@ function App() {
     setIsLoginPopupOpen(false);
   }
 
+  function handleSearch(keyWord) {
+    const foundCards = cards.filter((card) => {
+      console.log(keyWord);
+
+      setIsCardsVisible(true);
+      return card.keyWord === keyWord;
+
+    }); console.log(foundCards);
+    return setFoundCards(foundCards);
+  }
+
   return (
     <div className="root">
       <div className="page">
@@ -84,7 +99,9 @@ function App() {
               isAuthorized={isAuthorized}
             />
             <Main
-              cards={cards}
+              searchByKeyword={handleSearch}
+              isCardsVisible={isCardsVisible}
+              cards={foundCards}
             />
           </Route>
           <Route path="/saved-news">
@@ -98,6 +115,7 @@ function App() {
               user={user}
               cards={cards}
               isSevedNews={true}
+              isCardsVisible={true}
             />
           </Route>
         </Switch>
