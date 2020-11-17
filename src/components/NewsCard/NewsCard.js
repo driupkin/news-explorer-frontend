@@ -5,7 +5,7 @@ function NewsCard(props) {
     return (
 <div className="card">
     <div className="card__key-word">{props.card.keyWord}</div>
-    <button className={`card__icon ${props.isSevedNews ? 'card__trash-icon' : ''}`} />
+    <button className={`card__icon ${props.isSevedNews ? 'card__trash-icon' : 'card__fevor-icon'}`} />
     <img 
     className="card__image"
      alt="Изображение новости"

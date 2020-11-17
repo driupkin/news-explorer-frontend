@@ -35,7 +35,7 @@ function SearchForm(props) {
                         <button
                             type="submit"
                             className="search__button"
-                        // onClick={handleReqNews}
+                        onClick={props.onClick}
                         >Искать</button>
                     </fieldset>
                 </form>

@@ -10,14 +10,17 @@ function Main(props) {
         <main className="content">
             <SearchForm
                 searchWord={props.searchByKeyword}
+                onClick={props.onClick}
             />
             <NewsCardList
-                isVisible={props.isCardsVisible}
                 cards={props.cards}
             >
                 <h2 className="elements_title">Результаты поиска</h2>
             </NewsCardList>
-            <Preloader />
+            <Preloader
+                isPreloderOpen={props.isPreloderOpen}
+                cards={props.cards}
+            />
             <About />
         </main>
     );

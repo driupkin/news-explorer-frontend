@@ -38,14 +38,19 @@
     cursor: pointer;
     background: center no-repeat #FFFFFF;
     border-radius: 8px;
+    transition: background 0.3s linear;
 }
 
 .card__fevor-icon {
-    background-image: url('../../images/icon/fav-icon.svg');
+    background-image: url('../../images/icon/add-fav.svg');
+}
+
+.card__fevor-icon:hover {
+    background-image: url('../../images/icon/add-fav-black.svg');
 }
 
 .card__fevor-icon_active {
-    background-image: url('../../images/icon/fav-icon.svg');
+    background-image: url('../../images/icon/add-fav-active.svg');
 }
 
 .card__trash-icon {

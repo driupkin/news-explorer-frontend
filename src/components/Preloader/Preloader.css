@@ -1,11 +1,15 @@
 .preloader {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     padding: 80px 0 0;
     position: relative;
     min-height: 282px;
     background: #F5F6F7;
+}
+
+.preloader_opened {
+    display: flex;
 }
 
 .circle-preloader {
@@ -17,6 +21,12 @@
     background: linear-gradient(#F5F6F7, #F5F6F7) padding-box, linear-gradient(245deg, #1A1B22 25%, #D1D2D6 60%, #F5F6F7 75%) border-box;
     border-radius: 50%;
     animation: spin .75s infinite linear;
+}
+
+.preloader__image {
+    width: 96px;
+    height: 96px;
+    background: url('../../images/icon/not-found_v1.svg') no-repeat center;
 }
 
 .preloader__title {

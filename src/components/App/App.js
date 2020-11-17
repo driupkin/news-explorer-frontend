@@ -11,42 +11,49 @@ function App() {
 
   const cards = [
     {
-    keyWord: "Ладога",
-    date: "2 августа, 2019",
-    title: "Национальное достояние – парки",
-    paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-    subtitle: "Дзен",
-  },
-  {
-    keyWord: "Новая Ладога",
-    date: "2 августа, 2019",
-    title: "Национальное достояние – парки",
-    paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-    subtitle: "Дзен",
-  },
-  {
-    keyWord: "Ладога",
-    date: "2 августа, 2019",
-    title: "Национальное достояние – парки",
-    paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-    subtitle: "Дзен",
-  },
-  {
-    keyWord: "Ладога 4",
-    date: "2 августа, 2019",
-    title: "Национальное достояние – парки",
-    paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-    subtitle: "Дзен",
-  }
-]
+      keyWord: "Ладога",
+      date: "2 августа, 2019",
+      title: "Национальное достояние – парки",
+      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
+      subtitle: "Дзен",
+    },
+    {
+      keyWord: "Новая Ладога",
+      date: "2 августа, 2019",
+      title: "Национальное достояние – парки",
+      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
+      subtitle: "Дзен",
+    },
+    {
+      keyWord: "Ладога",
+      date: "2 августа, 2019",
+      title: "Национальное достояние – парки",
+      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
+      subtitle: "Дзен",
+    },
+    {
+      keyWord: "Ладога",
+      date: "2 августа, 2019",
+      title: "Национальное достояние – парки",
+      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
+      subtitle: "Дзен",
+    },
+    {
+      keyWord: "Ладога",
+      date: "2 августа, 2019",
+      title: "Национальное достояние – парки",
+      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
+      subtitle: "Дзен",
+    }
+  ]
 
   const user = { name: "Стасон" }
 
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState();
   const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
   const [isAuthorized, setIsAuthorized] = useState(true);
-  const [isCardsVisible, setIsCardsVisible] = useState();
   const [foundCards, setFoundCards] = useState([]);
+  const [isPreloderOpen, setIsPreloderOpen] = useState();
 
   useEffect(() => {
     function closeAllPopupsByOverlay(e) {
@@ -77,15 +84,17 @@ function App() {
     setIsLoginPopupOpen(false);
   }
 
-  function handleSearch(keyWord) {
+  function searchCards(keyWord) {
     const foundCards = cards.filter((card) => {
-      console.log(keyWord);
-
-      // setIsCardsVisible(true);
       return card.keyWord === keyWord;
-
-    }); console.log(foundCards);
+    });
+    setIsPreloderOpen(false);
     return setFoundCards(foundCards);
+  };
+
+  function handleSearch(keyWord) {
+
+    searchCards(keyWord);
   }
 
   return (
@@ -100,8 +109,9 @@ function App() {
             />
             <Main
               searchByKeyword={handleSearch}
-              isCardsVisible={isCardsVisible}
               cards={foundCards}
+              isPreloderOpen={isPreloderOpen}
+              onClick={() => setIsPreloderOpen(true)}
             />
           </Route>
           <Route path="/saved-news">
@@ -115,7 +125,6 @@ function App() {
               user={user}
               cards={cards}
               isSevedNews={true}
-              isCardsVisible={true}
             />
           </Route>
         </Switch>

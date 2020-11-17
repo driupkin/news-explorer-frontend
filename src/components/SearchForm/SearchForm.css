@@ -85,4 +85,13 @@
     text-align: center;
     justify-content: center;
     color: #FFFFFF;
+    transition: background 0.3s linear;
+}
+
+.search__button:hover {
+    background: #347EFF;
+}
+
+.search__button:active {
+    background: #2A65CC;
 }
