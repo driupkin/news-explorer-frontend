@@ -13,6 +13,7 @@ function Main(props) {
                 onClick={props.onClick}
             />
             <NewsCardList
+                isAuthorized={props.isAuthorized}
                 cards={props.cards}
             >
                 <h2 className="elements_title">Результаты поиска</h2>

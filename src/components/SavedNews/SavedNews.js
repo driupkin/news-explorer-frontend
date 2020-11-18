@@ -30,6 +30,7 @@ function SavedNews(props) {
                 <p className="author-data__subtitle">По ключевым словам: {handleKeyWords()}</p>
             </section>
             <NewsCardList
+                isAuthorized={props.isAuthorized}
                 isVisible={props.isCardsVisible}
                 isSevedNews={props.isSevedNews}
                 cards={props.cards}

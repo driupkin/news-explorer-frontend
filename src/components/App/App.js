@@ -18,7 +18,7 @@ function App() {
       subtitle: "Дзен",
     },
     {
-      keyWord: "Новая Ладога",
+      keyWord: "Новая Ладога длинное слово",
       date: "2 августа, 2019",
       title: "Национальное достояние – парки",
       paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
@@ -51,7 +51,7 @@ function App() {
 
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState();
   const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
-  const [isAuthorized, setIsAuthorized] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(false);
   const [foundCards, setFoundCards] = useState([]);
   const [isPreloderOpen, setIsPreloderOpen] = useState();
 
@@ -86,15 +86,15 @@ function App() {
 
   function searchCards(keyWord) {
     const foundCards = cards.filter((card) => {
-      return card.keyWord === keyWord;
+      return card.keyWord.toLowerCase() === keyWord.toLowerCase();
     });
     setIsPreloderOpen(false);
     return setFoundCards(foundCards);
   };
 
   function handleSearch(keyWord) {
-
-    searchCards(keyWord);
+    setIsPreloderOpen(true);
+  setTimeout(searchCards, 5000, keyWord);
   }
 
   return (
@@ -108,10 +108,11 @@ function App() {
               isAuthorized={isAuthorized}
             />
             <Main
+              isAuthorized={isAuthorized}
               searchByKeyword={handleSearch}
               cards={foundCards}
               isPreloderOpen={isPreloderOpen}
-              onClick={() => setIsPreloderOpen(true)}
+              // onClick={() => setIsPreloderOpen(true)}
             />
           </Route>
           <Route path="/saved-news">
@@ -125,6 +126,7 @@ function App() {
               user={user}
               cards={cards}
               isSevedNews={true}
+              isAuthorized={isAuthorized}
             />
           </Route>
         </Switch>

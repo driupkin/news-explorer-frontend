@@ -12,6 +12,7 @@ function NewsCardList(props) {
                     <div className="elements__container">
                         {props.cards.map((card, i) => (
                             <NewsCard
+                                isAuthorized={props.isAuthorized}
                                 isSevedNews={props.isSevedNews}
                                 card={card}
                                 key={i}
