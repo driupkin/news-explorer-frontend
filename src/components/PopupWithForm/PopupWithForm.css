@@ -56,6 +56,8 @@
     line-height: 17px;
     text-align: center;
     color: #000000;
+    margin: 0;
+    margin-top: 16px;
 }
 
 .popup__link {
@@ -97,6 +99,14 @@
     margin-top: 39px;
 }
 
+.form__button_inactive {
+    background: #E6E8EB;
+    color: #B6BCBF;
+    user-select: none;
+    pointer-events: none;
+    box-shadow: none;
+}
+
 .form__field {
     padding: 0;
     border: none;
@@ -124,4 +134,13 @@
     font-size: 12px;
     line-height: 15px;
     color: #2F71E5;
+}
+
+.form__input-error {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
 }

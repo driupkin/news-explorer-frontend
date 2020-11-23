@@ -4,8 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import SavedNews from '../SavedNews/SavedNews';
+import Siginin from '../Siginin/Siginin';
 
 function App() {
 
@@ -94,7 +94,7 @@ function App() {
 
   function handleSearch(keyWord) {
     setIsPreloderOpen(true);
-  setTimeout(searchCards, 5000, keyWord);
+    setTimeout(searchCards, 5000, keyWord);
   }
 
   return (
@@ -112,9 +112,18 @@ function App() {
               searchByKeyword={handleSearch}
               cards={foundCards}
               isPreloderOpen={isPreloderOpen}
-              // onClick={() => setIsPreloderOpen(true)}
             />
           </Route>
+          {/* <Route path="/siginup">
+            children={(isLoginPopupOpen) => {
+              return (
+                <Siginup
+                  onClose={closeAllPopups}
+                  isOpen={isLoginPopupOpen}
+                />
+              )
+            }}
+          </Route> */}
           <Route path="/saved-news">
             <Header
               onClick={() => setIsLoginPopupOpen(true)}
@@ -130,12 +139,11 @@ function App() {
             />
           </Route>
         </Switch>
-        <Footer />
-        <PopupWithForm
+        <Siginin
           onClose={closeAllPopups}
           isOpen={isLoginPopupOpen}
-          isAuthorized={isAuthorized}
         />
+        <Footer />
       </div>
     </div>
   );

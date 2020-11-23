@@ -10,7 +10,6 @@ function Main(props) {
         <main className="content">
             <SearchForm
                 searchWord={props.searchByKeyword}
-                onClick={props.onClick}
             />
             <NewsCardList
                 isAuthorized={props.isAuthorized}
