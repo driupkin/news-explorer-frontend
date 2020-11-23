@@ -5,20 +5,25 @@ import './PopupWithForm.css';
 function PopupWithForm(props) {
     const [isValid, setIsValid] = useState();
     const [isValidInput, setIsValidInput] = useState();
-    const [errorMessege, setErrorMessege] = useState();
+    const [errorMessege, setErrorMessege] = useState('');
     const errors = {
         email: "Неправильный формат email",
         password: "Парольне соответствует требованиям",
         name: "Слишком короткое имя"
     }
 
-    useEffect(validateInput, [props.inputs]);
-    
-    function validateInput() {
-        const name = props.inputs[0].name;
-        setIsValidInput(validator.isEmail(props.inputs[0].value));
-        setErrorMessege(errors[name]);
+    useEffect(validateInput, [props.input]);
+    console.log(Object.keys(props.input));
 
+    function validateInput(fildName) {
+        switch (fildName) {
+            case ["email"]: console.log('привет')
+                setIsValidInput(validator.isEmail(props.input.email));
+                setErrorMessege(errors.email);
+                break;
+            default:
+                break;
+        }
     }
     function handleSubmit(e) {
         e.preventDefault();

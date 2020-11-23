@@ -41,6 +41,7 @@ function Siginin(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             onChange={handleChangeData}
+            input={inputValues}
         />
     )
 }
