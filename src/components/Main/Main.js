@@ -16,7 +16,7 @@ function Main(props) {
                 isAuthorized={props.isAuthorized}
                 cards={props.cards}
             >
-                <h2 className="elements_title">Результаты поиска</h2>
+                <h2 className="elements__title">Результаты поиска</h2>
             </NewsCardList>
             <Preloader
                 isPreloderOpen={props.isPreloderOpen}

@@ -5,11 +5,17 @@ import Navigation from '../Navigation/Navigation';
 function Header(props) {
     return (
         <header className={`header ${props.isSevedNews ? 'header_theme_white' : ''}`}>
-            <div className={`header__logo ${props.isSevedNews ? 'header__logo_theme_white' : ''}`}></div>
+            <a
+                className={`header__logo ${props.isSevedNews ? 'header__logo_theme_white' : ''}`}
+                href="/"
+            />
             <Navigation>
                 <a
                     href="/"
-                    className={`header__link ${props.isSevedNews ? 'header__link_theme_white' : 'header__link_undeline'}`}>Главная</a>
+                    className={`header__link ${props.isSevedNews
+                        ? 'header__link_theme_white'
+                        : 'header__link_undeline'}`
+                    }>Главная</a>
                 <a
                     href="/saved-news"
                     className={
@@ -17,8 +23,7 @@ function Header(props) {
                         ${props.isSevedNews
                             ? 'header__link_theme_white header__link_undeline'
                             : ''}`
-                    }>Сохранённые статьи
-                </a>
+                    }>Сохранённые статьи</a>
                 <button
                     className={`header__button ${props.isSevedNews ? 'header__button_theme_white' : ''}`}
                     onClick={props.onClick}

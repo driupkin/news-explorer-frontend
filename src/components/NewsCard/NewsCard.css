@@ -102,6 +102,10 @@
     background-image: url('../../images/icon/trash.svg');
 }
 
+.card__trash-icon:hover {
+    background-image: url('../../images/icon/trash-black.svg');
+}
+
 .card__image {
     height: 272px;
     width: 400px;
