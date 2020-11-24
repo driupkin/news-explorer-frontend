@@ -2,9 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
     background: #FFFFFF;
     padding: 0 106px;
+    min-height: 80px;
 }
 
 .footer__copyright {
@@ -53,10 +53,35 @@
 @media screen and (max-width: 900px) {
     .footer {
         padding: 0 40px;
-        height: 64px;
+        min-height: 64px;
     }
-
     .footer__link_git-icon {
         margin-left: 26px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .footer {
+        flex-direction: column-reverse;
+        padding: 20px 16px;
+    }
+    .footer__copyright {
+        margin: 0;
+        margin-top: 40px;
+    }
+    .footer__link-container {
+        
+    }
+    .footer__link:nth-child(2) {
+
+    }
+    .footer__link:nth-child(3) {
+
+    }
+    .footer__link:nth-child(4) {
+
+    }
+    .footer__link:nth-child(5) {
+
     }
 }

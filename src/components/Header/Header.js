@@ -9,7 +9,7 @@ function Header(props) {
                 className={`header__logo ${props.isSevedNews ? 'header__logo_theme_white' : ''}`}
                 href="/"
             />
-            <Navigation>
+            <Navigation header={true}>
                 <a
                     href="/"
                     className={`header__link ${props.isSevedNews
@@ -36,8 +36,10 @@ function Header(props) {
                         }>
                     </div>
                 </button>
-
             </Navigation>
+            <button className={`header__button-popup 
+            ${props.isOpen ? 'header__button-popup_opened' : ''}
+            ${props.isSevedNews ? 'header__button-popup_theme_white' : ''}`} />
         </header>
     )
 }

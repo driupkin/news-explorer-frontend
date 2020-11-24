@@ -49,3 +49,30 @@
 .elements__button:hover {
     background: rgba(255, 255, 255, 0.9);
 }
+
+@media screen and (max-width: 900px) {
+    .elements {
+        padding-bottom: 40px;
+    }
+    .elements__container {
+        grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+        grid-gap: 8px;
+        padding: 32px 40px;
+    }
+    .elements__button {
+        height: 56px;
+        width: 240px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .elements {
+        padding-bottom: 32px;
+    }
+    .elements__container {
+        grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
+        grid-gap: 10px;
+        padding: 24px 16px 15px;
+
+    }
+}

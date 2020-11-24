@@ -24,6 +24,7 @@
     background: url('../../images/logo/NewsExplorer.svg') no-repeat;
     background-size: contain;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .header__logo_theme_white {
@@ -95,16 +96,43 @@
     background: url('../../images/icon/arrow-black.svg') no-repeat center;
 }
 
+.header__button-popup {
+    display: none;
+}
+
 @media screen and (max-width: 900px) {
     .header {
         height: 66px;
         padding: 0 40px;
         max-width: calc(100% - 80px);
     }
-
     .header__link {
         margin-right: 16px;
         font-size: 16px;
         height: 66px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header {
+        height: 56px;
+        padding: 0 16px;
+        max-width: calc(100% - 32px);
+    }
+    .header__logo {
+        width: 117px;
+        background-size: contain;
+        background-position-y: center;
+    }
+    .header__button-popup {
+        display: block;
+        height: 24px;
+        width: 24px;
+        border: 0;
+        outline: none;
+        background: url('../../images/icon/menu.svg') no-repeat center;
+    }
+    .header__button-popup_theme_white {
+        background-image: url('../../images/icon/menu-black.svg');
     }
 }

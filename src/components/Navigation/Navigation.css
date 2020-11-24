@@ -2,3 +2,13 @@
     display: flex;
     align-items: center;
 }
+
+@media screen and (max-width: 500px) {
+    .navigation {
+        flex-direction: row;
+        width: 100%;
+    }
+    .navigation_header {
+        display: none;
+    }
+}

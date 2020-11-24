@@ -123,3 +123,30 @@
         width: 160px;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .search__container {
+        margin-top: 86px;
+    }
+    .search__title {
+        font-size: 36px;
+        line-height: 40px;
+        height: 80px;
+        width: 285px;
+    }
+    .search__subtitle {
+        width: 288px;
+    }
+    .search__field {
+        display: block;
+        width: 288px;
+        margin: 122px auto 104px;
+    }
+    .search__string {
+        margin-bottom: 16px;
+    }
+    .search__button {
+        position: static;
+        width: 288px;
+    }
+}

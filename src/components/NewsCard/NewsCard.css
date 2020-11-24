@@ -143,6 +143,9 @@
 }
 
 .card__paragraph {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -151,6 +154,9 @@
     color: #1A1B22;
     margin: 0;
     margin-top: 16px;
+    width: 352px;
+    height: 88px;
+    overflow: hidden;
 }
 
 .card__subtitle {
@@ -164,4 +170,47 @@
     color: #B6BCBF;
     margin: 0;
     margin-top: auto;
+}
+
+@media screen and (max-width: 900px) {
+    .card {
+        height: 420px;
+        width: 224px;
+    }
+    .card__image {
+        height: 150px;
+        width: 224px;
+    }
+    .card__title {
+        font-size: 22px;
+        line-height: 24px;
+    }
+    .card__paragraph {
+        margin-top: 10px;
+        width: 192px;
+    }
+    .card__text {
+        height: 270px;
+        padding: 16px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .card {
+        height: 446px;
+        width: 288px;
+    }
+    .card__image {
+        height: 196px;
+        width: 288px;
+    }
+    .card__title {
+        line-height: 28px;
+    }
+    .card__paragraph {
+        width: 256px;
+    }
+    .card__subtitle {
+        margin-top: 8px;
+    }
 }
