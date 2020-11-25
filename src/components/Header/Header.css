@@ -135,4 +135,21 @@
     .header__button-popup_theme_white {
         background-image: url('../../images/icon/menu-black.svg');
     }
+    .header_menu_opened {
+        position: fixed;
+        z-index: 1;
+        background-color: black;
+    }
+    .header__links-container {
+        background-color: black;
+        padding: 16px 16px 24px;
+        width: calc(100% - 32px);
+    }
+    .header__link_undeline {
+        border: 0;
+    }
+    .header__button {
+        width: 100%;
+        justify-content: center;
+    }
 }

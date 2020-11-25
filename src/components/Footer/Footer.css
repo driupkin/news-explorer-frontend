@@ -46,7 +46,7 @@
     margin-left: 28px;
 }
 
-.footer__link:nth-child(2) {
+.footer__link:nth-child(1) {
     margin-right: 0;
 }
 
@@ -70,18 +70,11 @@
         margin-top: 40px;
     }
     .footer__link-container {
-        
-    }
-    .footer__link:nth-child(2) {
-
-    }
-    .footer__link:nth-child(3) {
-
-    }
-    .footer__link:nth-child(4) {
-
-    }
-    .footer__link:nth-child(5) {
-
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        height: 74px;
+        margin-right: auto;
     }
 }

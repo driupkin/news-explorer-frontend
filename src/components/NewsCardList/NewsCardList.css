@@ -69,10 +69,12 @@
     .elements {
         padding-bottom: 32px;
     }
+    .elements_nopadding {
+        padding-bottom: 0;
+    }
     .elements__container {
         grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
         grid-gap: 10px;
         padding: 24px 16px 15px;
-
     }
 }

@@ -32,6 +32,10 @@
     color: #1A1B22;
 }
 
+.author__subtitle:last-child {
+    margin-bottom: 0;
+}
+
 @media screen and (max-width: 1440px) {
     .author__avatar {
         width: 32vw;

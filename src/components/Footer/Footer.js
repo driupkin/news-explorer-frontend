@@ -12,12 +12,14 @@ function Footer() {
                     <a href="/"
                         className="footer__link"
                         target="blank">Главная</a>
-                    <a href="https://yandex.ru/"
-                        className="footer__link"
-                        target="blank">Яндекс.</a>
-                    <a href="https://praktikum.yandex.ru"
-                        className="footer__link"
-                        target="blank">Практикум</a>
+                    <div>
+                        <a href="https://yandex.ru/"
+                            className="footer__link"
+                            target="blank">Яндекс.</a>
+                        <a href="https://praktikum.yandex.ru"
+                            className="footer__link"
+                            target="blank">Практикум</a>
+                    </div>
                 </div>
                 <a href="https://github.com"
                     className="footer__link footer__link_git-icon"

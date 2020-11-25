@@ -7,8 +7,19 @@
     .navigation {
         flex-direction: row;
         width: 100%;
+        align-items: flex-start;
     }
     .navigation_header {
         display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+    .navigation_header_opened {
+        display: flex;
     }
 }
