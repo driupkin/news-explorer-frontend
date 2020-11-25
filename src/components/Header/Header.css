@@ -132,6 +132,9 @@
         outline: none;
         background: url('../../images/icon/menu.svg') no-repeat center;
     }
+    .header__button-popup_opened {
+        background-image: url('../../images/icon/menu-back.svg');
+    }
     .header__button-popup_theme_white {
         background-image: url('../../images/icon/menu-black.svg');
     }
@@ -139,6 +142,7 @@
         position: fixed;
         z-index: 1;
         background-color: black;
+        transition: all 0.3s linear;
     }
     .header__links-container {
         background-color: black;

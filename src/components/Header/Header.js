@@ -13,6 +13,11 @@ function Header(props) {
         return setIsOpen(true);
     }
 
+    function handelOpenPopap() {
+        props.openPopapSign();
+        setIsOpen(false);
+    }
+
     return (
         <header className={`header 
         ${props.isSevedNews ? 'header_theme_white' : ''}
@@ -41,7 +46,7 @@ function Header(props) {
                         }>Сохранённые статьи</a>
                     <button
                         className={`header__button ${props.isSevedNews ? 'header__button_theme_white' : ''}`}
-                        onClick={props.onClick}
+                        onClick={handelOpenPopap}
                     >{props.buttonName}
                         <div
                             className={

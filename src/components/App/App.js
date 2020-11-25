@@ -103,7 +103,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Header
-              onClick={() => setIsLoginPopupOpen(true)}
+              openPopapSign={() => setIsLoginPopupOpen(true)}
               buttonName={HeaderButtonName}
               isAuthorized={isAuthorized}
             />
@@ -117,7 +117,7 @@ function App() {
           </Route>
           <Route path="/saved-news">
             <Header
-              onClick={() => setIsLoginPopupOpen(true)}
+              openPopapSign={() => setIsLoginPopupOpen(true)}
               buttonName={HeaderButtonName}
               isSevedNews={true}
               isAuthorized={isAuthorized}

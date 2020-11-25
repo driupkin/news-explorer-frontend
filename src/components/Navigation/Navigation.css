@@ -10,7 +10,8 @@
         align-items: flex-start;
     }
     .navigation_header {
-        display: none;
+        display: flex;
+        visibility: hidden;
         flex-direction: column;
         position: absolute;
         top: 56px;
@@ -18,8 +19,12 @@
         height: 100vh;
         background: rgba(0, 0, 0, 0.5);
         z-index: 1;
+        transition: all 0.3s linear;
+        opacity: 0;
     }
     .navigation_header_opened {
-        display: flex;
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.3s linear;
     }
 }
