@@ -21,7 +21,8 @@ function Header(props) {
     return (
         <header className={`header 
         ${props.isSevedNews ? 'header_theme_white' : ''}
-        ${isOpen ? 'header_menu_opened' : ''}`}>
+        ${isOpen ? `header_menu_opened ${props.isSevedNews ? 'header_theme_white_opened' : ''}` : ''}
+        `}>
             <a
                 className={`header__logo ${props.isSevedNews ? 'header__logo_theme_white' : ''}`}
                 href="/"
@@ -29,7 +30,9 @@ function Header(props) {
             <Navigation
                 header={true}
                 isOpen={isOpen} >
-                <div className="header__links-container">
+                <div 
+                className={`header__links-container 
+                ${props.isSevedNews ?  'header__links-container_theme_white' : ''}`}>
                     <a
                         href="/"
                         className={`header__link ${props.isSevedNews

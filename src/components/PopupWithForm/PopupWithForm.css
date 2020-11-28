@@ -36,6 +36,7 @@
     height: 40px;
     width: 40px;
     background: url('../../images/icon/back.svg') no-repeat center;
+    background-size: contain;
 }
 
 .popup__title {
@@ -124,4 +125,21 @@
     font-size: 12px;
     line-height: 15px;
     color: #2F71E5;
+}
+
+@media screen and (max-width: 600px) {
+    .popup {
+        padding-top: 56px;
+    }
+    .popup__container {
+        width: 100%;
+        height: 100%;
+        padding: 16px 16px 0;
+    }
+    .popup__button {
+        height: 24px;
+        width: 24px;
+        right: 16px;
+        top: -40px;
+    }
 }

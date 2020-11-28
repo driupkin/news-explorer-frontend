@@ -25,7 +25,10 @@
     line-height: 24px;
     text-align: center;
     color: #1A1B22;
-    margin-right: 20px;
+}
+
+.footer__link:nth-child(1) {
+    margin-left: 20px;
 }
 
 .footer__link_git-icon {
@@ -46,14 +49,14 @@
     margin-left: 28px;
 }
 
-.footer__link:nth-child(1) {
-    margin-right: 0;
-}
-
 @media screen and (max-width: 900px) {
     .footer {
         padding: 0 40px;
         min-height: 64px;
+    }
+    .footer__link-container {
+        display: flex;
+        flex-direction: row;
     }
     .footer__link_git-icon {
         margin-left: 26px;
@@ -70,11 +73,13 @@
         margin-top: 40px;
     }
     .footer__link-container {
-        display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
         height: 74px;
         margin-right: auto;
+    }
+    .footer__link:nth-child(1) {
+        margin: 0;
     }
 }

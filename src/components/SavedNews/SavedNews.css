@@ -36,20 +36,36 @@
     margin: 0;
 }
 
+@media screen and (max-width: 900px) {
+    .author-data {
+        padding: 90px 40px 32px;
+    }
+    .author-data__title {
+        font-size: 14px;
+        line-height: 24px;
+    }
+    .author-data__articles {
+        font-size: 30px;
+        line-height: 34px;
+        width: 336px;
+        margin: 16px 0;
+    }
+    .author-data__subtitle {
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .author-data {
         padding: 64px 16px 32px;
     }
     .author-data__articles {
-        font-size: 30px;
-        line-height: 34px;
         width: 288px;
-        margin: 16px 0;
     }
     .author-data__title {
         font-size: 12px;
         line-height: 24px;
         width: 288px;
     }
-    .author-data__subtitle {}
 }
