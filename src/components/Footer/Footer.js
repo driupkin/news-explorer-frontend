@@ -10,8 +10,7 @@ function Footer() {
             <Navigation>
                 <div className="footer__link-container">
                     <a href="/"
-                        className="footer__link"
-                        target="blank">Главная</a>
+                        className="footer__link">Главная</a>
                     <div>
                         <a href="https://yandex.ru/"
                             className="footer__link"
