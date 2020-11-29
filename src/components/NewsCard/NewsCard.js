@@ -4,6 +4,15 @@ import './NewsCard.css';
 function NewsCard(props) {
 
     const [onHover, setOnHover] = useState();
+    const [isFavor, setIsFavor] = useState(false);
+// вр`еменная функция проверки сохранения карточки
+    function addFavor() {
+        if (isFavor) {
+            setIsFavor(false);
+        } else {
+            setIsFavor(true);
+        }
+    }
 
     return (
         <div className="card">
@@ -15,9 +24,15 @@ function NewsCard(props) {
                     className={`card__popup ${(!props.isAuthorized && onHover) ? 'card__popup_opened' : ''}`}
                 >{props.isSevedNews ? 'Убрать из сохранённых' : 'Войдите, чтобы сохранять статьи'}</h3>
                 <button
+                onClick={addFavor}
                     onMouseOut={() => setOnHover(false)}
                     onMouseOver={() => setOnHover(true)}
-                    className={`card__icon ${props.isSevedNews ? 'card__trash-icon' : 'card__fevor-icon'}`}
+                    className={`card__icon 
+                    ${props.isSevedNews
+                            ? 'card__trash-icon'
+                            : `card__fevor-icon ${isFavor
+                                ? 'card__fevor-icon_active'
+                                : ''}`}`}
                 />
             </div>
             <img
