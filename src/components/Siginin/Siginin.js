@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 function Siginin(props) {
 
-    const [inputValues, setInputValues] = useState({
-        email: '',
-        password: ''
-    });
+    const [inputValues, setInputValues] = useState({});
+
+    const arr = Object.keys(inputValues);
+    const fildName = arr.shift();
 
     function handleChangeData(e) {
         const name = e.target.name;
         const value = e.target.value;
         setInputValues({ [name]: value });
+        props.inputValidation(fildName, value);
     }
-
-
 
     const inputs = [
         {
@@ -41,7 +40,10 @@ function Siginin(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             onChange={handleChangeData}
-            input={inputValues}
+            input={fildName}
+            isValidInput={props.isValidInput}
+            errorMessege={props.errorMessege}
+            isValid={props.isValid}
         />
     )
 }

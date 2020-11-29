@@ -2,12 +2,14 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    background: url('../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.png') no-repeat #FFFFFF center;
+    background-size: cover;
 }
 
 .search__container {
     display: inherit;
     flex-direction: column;
-    margin-top: 80px;
+    margin-top: 160px;
 }
 
 .search__title {
@@ -31,6 +33,8 @@
     font-size: 18px;
     line-height: 24px;
     color: #FFFFFF;
+    margin: 0;
+    margin-top: 32px;
 }
 
 .search__field {
@@ -94,4 +98,55 @@
 
 .search__button:active {
     background: #2A65CC;
+}
+
+@media screen and (max-width: 900px) {
+    .search__container {
+        margin-top: 104px;
+    }
+    .search__title {
+        width: 385px;
+        height: 80px;
+        font-size: 36px;
+        line-height: 40px;
+    }
+    .search__subtitle {
+        width: 452px;
+        margin-top: 16px;
+    }
+    .search__field {
+        width: 448px;
+        height: 56px;
+        margin: 48px auto;
+    }
+    .search__button {
+        width: 160px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .search__container {
+        margin-top: 86px;
+    }
+    .search__title {
+        font-size: 36px;
+        line-height: 40px;
+        height: 80px;
+        width: 285px;
+    }
+    .search__subtitle {
+        width: 288px;
+    }
+    .search__field {
+        display: block;
+        width: 288px;
+        margin: 122px auto 104px;
+    }
+    .search__string {
+        margin-bottom: 16px;
+    }
+    .search__button {
+        position: static;
+        width: 288px;
+    }
 }

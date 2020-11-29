@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import validator from 'validator';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -46,6 +47,15 @@ function App() {
       subtitle: "Дзен",
     }
   ]
+
+  const [isValid, setIsValid] = useState();
+  const [isValidInput, setIsValidInput] = useState();
+  const [errorMessege, setErrorMessege] = useState('');
+  const errors = {
+    email: "Неправильный формат email",
+    password: "Парольне соответствует требованиям",
+    name: "Слишком короткое имя"
+  }
 
   const user = { name: "Стасон" }
 
@@ -97,13 +107,25 @@ function App() {
     setTimeout(searchCards, 5000, keyWord);
   }
 
+  function validateInput(fildName, input) {
+    console.log(fildName);
+    switch (fildName) {
+      case 'email':
+        setIsValidInput(validator.isEmail(input));
+        setErrorMessege(errors.email);
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <div className="root">
       <div className="page">
         <Switch>
           <Route exact path="/">
             <Header
-              onClick={() => setIsLoginPopupOpen(true)}
+              openPopapSign={() => setIsLoginPopupOpen(true)}
               buttonName={HeaderButtonName}
               isAuthorized={isAuthorized}
             />
@@ -126,7 +148,7 @@ function App() {
           </Route> */}
           <Route path="/saved-news">
             <Header
-              onClick={() => setIsLoginPopupOpen(true)}
+              openPopapSign={() => setIsLoginPopupOpen(true)}
               buttonName={HeaderButtonName}
               isSevedNews={true}
               isAuthorized={isAuthorized}
@@ -142,6 +164,10 @@ function App() {
         <Siginin
           onClose={closeAllPopups}
           isOpen={isLoginPopupOpen}
+          inputValidation={validateInput}
+          isValidInput={isValidInput}
+          errorMessege={errorMessege}
+          isValid={isValid}
         />
         <Footer />
       </div>

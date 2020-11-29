@@ -1,30 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import validator from 'validator';
+import React from 'react';
 import './PopupWithForm.css';
 
 function PopupWithForm(props) {
-    const [isValid, setIsValid] = useState();
-    const [isValidInput, setIsValidInput] = useState();
-    const [errorMessege, setErrorMessege] = useState('');
-    const errors = {
-        email: "Неправильный формат email",
-        password: "Парольне соответствует требованиям",
-        name: "Слишком короткое имя"
-    }
 
-    useEffect(validateInput, [props.input]);
-    console.log(Object.keys(props.input));
-
-    function validateInput(fildName) {
-        switch (fildName) {
-            case ["email"]: console.log('привет')
-                setIsValidInput(validator.isEmail(props.input.email));
-                setErrorMessege(errors.email);
-                break;
-            default:
-                break;
-        }
-    }
     function handleSubmit(e) {
         e.preventDefault();
         props.onChangeData(...props.values);
@@ -45,7 +23,7 @@ function PopupWithForm(props) {
                                 <div className="form__input-container" key={i} >
                                     <h2 className="form__title">{e.inputName}</h2>
                                     <input
-                                        value={e.value}
+                                        value={e.value || ''}
                                         className="form__input"
                                         type={e.inputType}
                                         onChange={props.onChange}
@@ -54,12 +32,14 @@ function PopupWithForm(props) {
                                     <span
                                         className='form__input-error'
                                         id={`${e.name}-input-error`}
-                                    >{isValidInput ? '' : errorMessege}</span>
+                                    >{!props.isValidInput && e.name === props.input
+                                        ? props.errorMessege
+                                        : ''}</span>
                                 </div>
                             )
                         })}
                     </fieldset>
-                    <button className={`form__button ${isValid ? '' : 'form__button_inactive'}`}>{props.buttonName}</button>
+                    <button className={`form__button ${props.isValid ? '' : 'form__button_inactive'}`}>{props.buttonName}</button>
                 </form>
                 <p className="popup_subtitle">или&ensp;
                     <a className="popup__link" href={props.link}>{props.linkName}</a>
