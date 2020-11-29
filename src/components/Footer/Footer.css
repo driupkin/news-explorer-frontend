@@ -16,6 +16,11 @@
     color: #B6BCBF;
 }
 
+.footer__link-container {
+    display: flex;
+    flex-direction: row;
+}
+
 .footer__link {
     text-decoration: none;
     font-family: Roboto;
@@ -53,10 +58,6 @@
     .footer {
         padding: 0 40px;
         min-height: 64px;
-    }
-    .footer__link-container {
-        display: flex;
-        flex-direction: row;
     }
     .footer__link_git-icon {
         margin-left: 26px;

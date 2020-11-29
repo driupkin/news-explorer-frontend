@@ -6,8 +6,17 @@
 }
 
 @font-face {
-    font-family: 'Roboto Slab';
+    font-family: 'Roboto';
     font-style: normal;
+    font-weight: 500;
     font-display: swap;
-    src: url("robotoslab-regular.woff") format("woff");
+    src: url("roboto-medium.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-display: swap;
+    src: url("roboto-black.woff") format("woff");
 }

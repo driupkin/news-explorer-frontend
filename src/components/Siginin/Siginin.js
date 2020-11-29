@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 function Siginin(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isValid, setIsValid] = useState(false)
+
+    useEffect(() => {
+        props.isValidEmail && props.isValidPass && setIsValid(true);
+    }, [props.isValidEmail, props.isValidPass])
 
     function handleChangeEmail(e) {
         const name = e.target.name;
@@ -29,7 +34,8 @@ function Siginin(props) {
             link={'/siginup'}
             isOpen={props.isOpen}
             onClose={props.onClose}
-            isValid={props.isValid}
+            isValid={isValid}
+            onChangeData={props.handleSignin}
         >
             <h2 className="form__title">Email</h2>
             <input
@@ -41,9 +47,9 @@ function Siginin(props) {
             />
             <span
                 className='form__input-error'
-            >{!props.isValidInput 
-            ? props.errorMessege 
-            : ''}</span>
+            >{!props.isValidEmail && props.errorMessageEmail
+                ? props.errorMessageEmail
+                : ''}</span>
             <h2 className="form__title">Пароль</h2>
             <input
                 value={password}
@@ -54,9 +60,9 @@ function Siginin(props) {
             />
             <span
                 className='form__input-error'
-            >{!props.isValidInput 
-            ? props.errorMessege 
-            : ''}</span>
+            >{!props.isValidPass && props.errorMessagePass
+                ? props.errorMessagePass
+                : ''}</span>
         </PopupWithForm>
     )
 }

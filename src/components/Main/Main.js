@@ -4,6 +4,7 @@ import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import NewsCardList from '../NewsCardList/NewsCardList';
+import NotFound from '../NotFound/NotFound';
 
 function Main(props) {
     return (
@@ -11,9 +12,11 @@ function Main(props) {
             <SearchForm
                 searchWord={props.searchByKeyword}
             />
+            <NotFound isOpen={props.isFound} />
             <NewsCardList
                 isAuthorized={props.isAuthorized}
                 cards={props.cards}
+                isOpen={props.cardsListOpen}
             >
                 <h2 className="elements__title">Результаты поиска</h2>
             </NewsCardList>

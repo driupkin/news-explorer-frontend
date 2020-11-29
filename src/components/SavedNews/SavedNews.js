@@ -17,9 +17,8 @@ function SavedNews(props) {
             case 4 < keyWords.length < 21:
                 return twoKeyWords.join(', ') + ' и ' + keyWords.length + '-ти другим';
             default:
-                return 'поиска не производилось.';
+                return '';
         }
-
     }
 
     return (
@@ -34,6 +33,7 @@ function SavedNews(props) {
                 isVisible={props.isCardsVisible}
                 isSevedNews={props.isSevedNews}
                 cards={props.cards}
+                isOpen={props.cardsListOpen}
             />
         </div>
     )

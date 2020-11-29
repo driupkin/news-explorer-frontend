@@ -6,7 +6,7 @@ function FormValidator() {
         switch (fildName) {
             case ["email"]: console.log('привет')
                 setIsValidInput(validator.isEmail(props.input.email));
-                setErrorMessege(errors.email);
+                setErrorMessage(errors.email);
                 break;
             default:
                 break;

@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
 
 function NewsCardList(props) {
+
+    const [countCards, setCountCards] = useState(3);
+
+    function showByThreeCards(count) {
+        let threeCards;
+        if (props.cards.length < 4) {
+            return threeCards = props.cards;
+        } else {
+            return threeCards = props.cards.slice(0, count);
+        }
+    }
+
     return (
         <div>
-            {/* если длинна массива, переданных карточек = 0 - ничего не отрисовываем */}
-            {props.cards.length !== 0
+            {props.isOpen
                 ? <section className={`elements ${props.isSevedNews ? 'elements_nopadding' : ''}`}>
                     {props.children}
                     <div className="elements__container">
-                        {props.cards.map((card, i) => (
+                        {showByThreeCards(countCards).map((card, i) => (
                             <NewsCard
                                 isAuthorized={props.isAuthorized}
                                 isSevedNews={props.isSevedNews}
@@ -19,9 +30,14 @@ function NewsCardList(props) {
                             />
                         ))}
                     </div>
-                    <button className={`elements__button ${props.isSevedNews ? 'elements__button_none' : ''}`}>Показать еще</button>
+                    <button
+                    onClick={() => setCountCards(countCards + 3)}
+                        className={`elements__button ${props.isSevedNews
+                            ? 'elements__button_none'
+                            : ''}`}>Показать еще</button>
                 </section>
-                : ''}
+                : ''
+            }
         </div>
     )
 }

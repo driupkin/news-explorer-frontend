@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
@@ -30,23 +31,25 @@ function Header(props) {
             <Navigation
                 header={true}
                 isOpen={isOpen} >
-                <div 
-                className={`header__links-container 
-                ${props.isSevedNews ?  'header__links-container_theme_white' : ''}`}>
+                <div
+                    className={`header__links-container 
+                ${props.isSevedNews ? 'header__links-container_theme_white' : ''}`}>
                     <a
                         href="/"
                         className={`header__link ${props.isSevedNews
                             ? 'header__link_theme_white'
                             : 'header__link_undeline'}`
                         }>Главная</a>
-                    <a
-                        href="/saved-news"
-                        className={
-                            `header__link 
+                    {props.isAuthorized
+                        ? <a
+                            href="/saved-news"
+                            className={
+                                `header__link 
                         ${props.isSevedNews
-                                ? 'header__link_theme_white header__link_undeline'
-                                : ''}`
-                        }>Сохранённые статьи</a>
+                                    ? 'header__link_theme_white header__link_undeline'
+                                    : ''}`
+                            }>Сохранённые статьи</a>
+                        : ''}
                     <button
                         className={`header__button ${props.isSevedNews ? 'header__button_theme_white' : ''}`}
                         onClick={handelOpenPopap}

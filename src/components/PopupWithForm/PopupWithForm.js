@@ -5,7 +5,7 @@ function PopupWithForm(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        props.onChangeData(...props.values);
+        props.onChangeData();
     }
 
     return (

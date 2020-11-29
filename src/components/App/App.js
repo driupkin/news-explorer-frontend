@@ -7,63 +7,25 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import SavedNews from '../SavedNews/SavedNews';
 import Siginin from '../Siginin/Siginin';
+import { cards, user, errors } from '../../utils/constants';
 
 function App() {
 
-  const cards = [
-    {
-      keyWord: "Ладога",
-      date: "2 августа, 2019",
-      title: "Национальное достояние – парки",
-      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-      subtitle: "Дзен",
-    },
-    {
-      keyWord: "Новая Ладога длинное слово",
-      date: "2 августа, 2019",
-      title: "Национальное достояние – парки",
-      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-      subtitle: "Дзен",
-    },
-    {
-      keyWord: "Ладога",
-      date: "2 августа, 2019",
-      title: "Национальное достояние – парки",
-      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-      subtitle: "Дзен",
-    },
-    {
-      keyWord: "Ладога",
-      date: "2 августа, 2019",
-      title: "Национальное достояние – парки",
-      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-      subtitle: "Дзен",
-    },
-    {
-      keyWord: "Ладога",
-      date: "2 августа, 2019",
-      title: "Национальное достояние – парки",
-      paragraph: "В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.",
-      subtitle: "Дзен",
-    }
-  ]
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidPass, setIsValidPass] = useState(false);
+  const [isValidName, setIsValidName] = useState(false);
+  const [errorMessageEmail, setErrorMessageEmail] = useState('');
+  const [errorMessagePass, setErrorMessagePass] = useState('');
+  const [errorMessageName, setErrorMessageName] = useState('');
 
-  const [isValid, setIsValid] = useState();
-  const [isValidInput, setIsValidInput] = useState();
-  const [errorMessege, setErrorMessege] = useState('');
-  const errors = {
-    email: "Неправильный формат email",
-    password: "Парольне соответствует требованиям",
-    name: "Слишком короткое имя"
-  }
-
-  const user = { name: "Стасон" }
 
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState();
   const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [foundCards, setFoundCards] = useState([]);
   const [isPreloderOpen, setIsPreloderOpen] = useState();
+  const [openCards, setOpenCards] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     function closeAllPopupsByOverlay(e) {
@@ -99,24 +61,47 @@ function App() {
       return card.keyWord.toLowerCase() === keyWord.toLowerCase();
     });
     setIsPreloderOpen(false);
+    setOpenCards(true);
+    if (foundCards.length === 0) {
+      setNotFound(true);
+      setOpenCards(false);
+    }
     return setFoundCards(foundCards);
   };
 
   function handleSearch(keyWord) {
+    setOpenCards(false);
+    setNotFound(false);
     setIsPreloderOpen(true);
-    setTimeout(searchCards, 5000, keyWord);
+    setTimeout(searchCards, 3000, keyWord);
   }
-
+  // валидация сложноватая, буду упрощать
   function validateInput(fildName, input) {
-    console.log(fildName);
     switch (fildName) {
       case 'email':
-        setIsValidInput(validator.isEmail(input));
-        setErrorMessege(errors.email);
+        setIsValidEmail(validator.isEmail(input));
+        if (!isValidEmail) {
+          setErrorMessageEmail(errors.email);
+        }
+        break;
+      case 'password':
+        setIsValidPass(input.match('^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])'));
+        if (!isValidEmail) {
+          setErrorMessagePass(errors.password);
+        }
+        break;
+      case 'name':
+        setIsValidName(input.length > 2);
+        setErrorMessageName(errors.name);
         break;
       default:
         break;
     }
+  }
+
+  function handleSignin() {
+    setIsAuthorized(true);
+    closeAllPopups();
   }
 
   return (
@@ -134,6 +119,8 @@ function App() {
               searchByKeyword={handleSearch}
               cards={foundCards}
               isPreloderOpen={isPreloderOpen}
+              isFound={notFound}
+              cardsListOpen={openCards}
             />
           </Route>
           {/* <Route path="/siginup">
@@ -149,15 +136,16 @@ function App() {
           <Route path="/saved-news">
             <Header
               openPopapSign={() => setIsLoginPopupOpen(true)}
-              buttonName={HeaderButtonName}
+              buttonName={user.name}
               isSevedNews={true}
-              isAuthorized={isAuthorized}
+              isAuthorized={true}
             />
             <SavedNews
               user={user}
               cards={cards}
               isSevedNews={true}
               isAuthorized={isAuthorized}
+              cardsListOpen={true}
             />
           </Route>
         </Switch>
@@ -165,9 +153,11 @@ function App() {
           onClose={closeAllPopups}
           isOpen={isLoginPopupOpen}
           inputValidation={validateInput}
-          isValidInput={isValidInput}
-          errorMessege={errorMessege}
-          isValid={isValid}
+          errorMessageEmail={errorMessageEmail}
+          errorMessagePass={errorMessagePass}
+          isValidEmail={isValidEmail}
+          isValidPass={isValidPass}
+          handleSignin={handleSignin}
         />
         <Footer />
       </div>
