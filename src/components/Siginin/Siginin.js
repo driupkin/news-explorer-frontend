@@ -1,50 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 function Siginin(props) {
 
-    const [inputValues, setInputValues] = useState({});
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const arr = Object.keys(inputValues);
-    const fildName = arr.shift();
-
-    function handleChangeData(e) {
+    function handleChangeEmail(e) {
         const name = e.target.name;
         const value = e.target.value;
-        setInputValues({ [name]: value });
-        props.inputValidation(fildName, value);
+        setEmail(value);
+        props.inputValidation(name, value);
     }
 
-    const inputs = [
-        {
-            inputName: "Email",
-            inputType: "email",
-            value: inputValues.email,
-            name: "email"
-        },
-        {
-            inputName: "Пароль",
-            inputType: "text",
-            value: inputValues.password,
-            name: "password"
-        },
-    ];
+    function handleChangePassword(e) {
+        const name = e.target.name;
+        const value = e.target.value;
+        setPassword(value);
+        props.inputValidation(name, value);
+    }
 
     return (
         <PopupWithForm
             tiltle={'Вход'}
-            inputs={inputs}
+            inputName={''}
             buttonName={'Войти'}
             linkName={'Зарегистрироваться'}
             link={'/siginup'}
             isOpen={props.isOpen}
             onClose={props.onClose}
-            onChange={handleChangeData}
-            input={fildName}
-            isValidInput={props.isValidInput}
-            errorMessege={props.errorMessege}
             isValid={props.isValid}
-        />
+        >
+            <h2 className="form__title">Email</h2>
+            <input
+                value={email}
+                className="form__input"
+                type="email"
+                onChange={handleChangeEmail}
+                name="email"
+            />
+            <span
+                className='form__input-error'
+            >{!props.isValidInput 
+            ? props.errorMessege 
+            : ''}</span>
+            <h2 className="form__title">Пароль</h2>
+            <input
+                value={password}
+                className="form__input"
+                type="password"
+                onChange={handleChangePassword}
+                name="password"
+            />
+            <span
+                className='form__input-error'
+            >{!props.isValidInput 
+            ? props.errorMessege 
+            : ''}</span>
+        </PopupWithForm>
     )
 }
 
