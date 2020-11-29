@@ -6,7 +6,7 @@ function NewsCardList(props) {
     return (
         <div>
             {/* если длинна массива, переданных карточек = 0 - ничего не отрисовываем */}
-            {props.cards.length !== 0
+            {props.isOpen
                 ? <section className={`elements ${props.isSevedNews ? 'elements_nopadding' : ''}`}>
                     {props.children}
                     <div className="elements__container">
@@ -21,7 +21,8 @@ function NewsCardList(props) {
                     </div>
                     <button className={`elements__button ${props.isSevedNews ? 'elements__button_none' : ''}`}>Показать еще</button>
                 </section>
-                : ''}
+                : ''
+            }
         </div>
     )
 }

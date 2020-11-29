@@ -34,6 +34,7 @@ function SavedNews(props) {
                 isVisible={props.isCardsVisible}
                 isSevedNews={props.isSevedNews}
                 cards={props.cards}
+                isOpen={props.cardsListOpen}
             />
         </div>
     )

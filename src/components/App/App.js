@@ -54,6 +54,8 @@ function App() {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [foundCards, setFoundCards] = useState([]);
   const [isPreloderOpen, setIsPreloderOpen] = useState();
+  const [openCards, setOpenCards] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     function closeAllPopupsByOverlay(e) {
@@ -89,12 +91,19 @@ function App() {
       return card.keyWord.toLowerCase() === keyWord.toLowerCase();
     });
     setIsPreloderOpen(false);
+    setOpenCards(true);
+    if (foundCards.length === 0) {
+      setNotFound(true);
+      setOpenCards(false);
+    }
     return setFoundCards(foundCards);
   };
 
   function handleSearch(keyWord) {
+    setOpenCards(false);
+    setNotFound(false);
     setIsPreloderOpen(true);
-  setTimeout(searchCards, 5000, keyWord);
+    setTimeout(searchCards, 3000, keyWord);
   }
 
   return (
@@ -112,7 +121,8 @@ function App() {
               searchByKeyword={handleSearch}
               cards={foundCards}
               isPreloderOpen={isPreloderOpen}
-              // onClick={() => setIsPreloderOpen(true)}
+              isFound={notFound}
+              cardsListOpen={openCards}
             />
           </Route>
           <Route path="/saved-news">
@@ -127,6 +137,7 @@ function App() {
               cards={cards}
               isSevedNews={true}
               isAuthorized={isAuthorized}
+              cardsListOpen={true}
             />
           </Route>
         </Switch>
