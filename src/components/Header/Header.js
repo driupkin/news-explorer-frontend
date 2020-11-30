@@ -57,13 +57,13 @@ function Header(props) {
                             : ''}`}
                         onClick={handelOpenPopap}
                     >{props.buttonName}
-                        <div
+                        <span
                             className={
                                 `header__button-icon 
                             ${props.isAuthorized ? 'header__button-icon_authorized' : ''}
                             ${props.isSevedNews ? 'header__button-icon_theme_white' : ''}`
                             }>
-                        </div>
+                        </span>
                     </button>
                 </div>
             </Navigation>
