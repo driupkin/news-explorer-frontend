@@ -6,7 +6,8 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import SavedNews from '../SavedNews/SavedNews';
-import Siginin from '../Siginin/Siginin';
+import Signin from '../Signin/Signin';
+import Signup from '../Signup/Signup';
 import { cards, user, errors } from '../../utils/constants';
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
     if (isAuthorized) {
       return setHeaderButtonName(user.name);
     }
-  }, [isAuthorized, user.name])
+  }, [isAuthorized])
 
   function closeAllPopups() {
     setIsLoginPopupOpen(false);
@@ -86,13 +87,15 @@ function App() {
         break;
       case 'password':
         setIsValidPass(input.match('^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])'));
-        if (!isValidEmail) {
+        if (!isValidPass) {
           setErrorMessagePass(errors.password);
         }
         break;
       case 'name':
         setIsValidName(input.length > 2);
-        setErrorMessageName(errors.name);
+        if (!isValidName) {
+          setErrorMessageName(errors.name);
+        }
         break;
       default:
         break;
@@ -101,6 +104,10 @@ function App() {
 
   function handleSignin() {
     setIsAuthorized(true);
+    closeAllPopups();
+  }
+
+  function handleSiginup() {
     closeAllPopups();
   }
 
@@ -122,11 +129,25 @@ function App() {
               isFound={notFound}
               cardsListOpen={openCards}
             />
+            <Route path="/signup">
+            <Signup
+          onClose={closeAllPopups}
+          isOpen={isLoginPopupOpen}
+          inputValidation={validateInput}
+          errorMessageEmail={errorMessageEmail}
+          errorMessagePass={errorMessagePass}
+          errorMessageName={errorMessageName}
+          isValidEmail={isValidEmail}
+          isValidPass={isValidPass}
+          isValidName={isValidName}
+          handleSiginup={handleSiginup}
+        />
+            </Route>
           </Route>
           {/* <Route path="/siginup">
             children={(isLoginPopupOpen) => {
               return (
-                <Siginup
+                <Signup
                   onClose={closeAllPopups}
                   isOpen={isLoginPopupOpen}
                 />
@@ -149,16 +170,17 @@ function App() {
             />
           </Route>
         </Switch>
-        <Siginin
-          onClose={closeAllPopups}
-          isOpen={isLoginPopupOpen}
-          inputValidation={validateInput}
-          errorMessageEmail={errorMessageEmail}
-          errorMessagePass={errorMessagePass}
-          isValidEmail={isValidEmail}
-          isValidPass={isValidPass}
-          handleSignin={handleSignin}
-        />
+        <Signin
+                onClose={closeAllPopups}
+                isOpen={isLoginPopupOpen}
+                inputValidation={validateInput}
+                errorMessageEmail={errorMessageEmail}
+                errorMessagePass={errorMessagePass}
+                isValidEmail={isValidEmail}
+                isValidPass={isValidPass}
+                handleSignin={handleSignin}
+              />
+        
         <Footer />
       </div>
     </div>

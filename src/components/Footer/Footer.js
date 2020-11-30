@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 import Navigation from '../Navigation/Navigation';
 
@@ -9,8 +9,8 @@ function Footer() {
             <p className="footer__copyright">&copy; 2020 Supersite, Powered by News API</p>
             <Navigation>
                 <div className="footer__link-container">
-                    <a href="/"
-                        className="footer__link">Главная</a>
+                    <Link to="/"
+                        className="footer__link">Главная</Link>
                     <div>
                         <a href="https://yandex.ru/"
                             className="footer__link"

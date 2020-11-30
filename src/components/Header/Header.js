@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-
+import { Link, useRouteMatch } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
 function Header(props) {
+
+    const { path, url } = useRouteMatch();
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -24,9 +26,10 @@ function Header(props) {
         ${props.isSevedNews ? 'header_theme_white' : ''}
         ${isOpen ? `header_menu_opened ${props.isSevedNews ? 'header_theme_white_opened' : ''}` : ''}
         `}>
-            <a
+            <Link
+                to="/"
                 className={`header__logo ${props.isSevedNews ? 'header__logo_theme_white' : ''}`}
-                href="/"
+
             />
             <Navigation
                 header={true}
@@ -34,25 +37,26 @@ function Header(props) {
                 <div
                     className={`header__links-container 
                 ${props.isSevedNews ? 'header__links-container_theme_white' : ''}`}>
-                    <a
-                        href="/"
+                    <Link
+                        to="/"
                         className={`header__link ${props.isSevedNews
                             ? 'header__link_theme_white'
                             : 'header__link_undeline'}`
-                        }>Главная</a>
+                        }>Главная</Link>
                     {props.isAuthorized
-                        ? <a
-                            href="/saved-news"
+                        ? <Link
+                            to="/saved-news"
                             className={
                                 `header__link 
                         ${props.isSevedNews
                                     ? 'header__link_theme_white header__link_undeline'
                                     : ''}`
-                            }>Сохранённые статьи</a>
+                            }>Сохранённые статьи</Link>
                         : ''}
-                    <button
+                    <Link to={`${url}/signin`}
                         className={`header__button ${props.isSevedNews ? 'header__button_theme_white' : ''}`}
-                        onClick={handelOpenPopap}
+                        // onClick={handelOpenPopap}
+                        
                     >{props.buttonName}
                         <div
                             className={
@@ -61,7 +65,7 @@ function Header(props) {
                             ${props.isSevedNews ? 'header__button-icon_theme_white' : ''}`
                             }>
                         </div>
-                    </button>
+                    </Link>
                 </div>
             </Navigation>
             <button

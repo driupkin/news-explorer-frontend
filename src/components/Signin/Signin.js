@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function Siginin(props) {
+function Signin(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -44,6 +44,7 @@ function Siginin(props) {
                 type="email"
                 onChange={handleChangeEmail}
                 name="email"
+                placeholder="Введите почту"
             />
             <span
                 className='form__input-error'
@@ -57,6 +58,7 @@ function Siginin(props) {
                 type="password"
                 onChange={handleChangePassword}
                 name="password"
+                placeholder="Введите пароль"
             />
             <span
                 className='form__input-error'
@@ -67,4 +69,4 @@ function Siginin(props) {
     )
 }
 
-export default Siginin;
+export default Signin;
