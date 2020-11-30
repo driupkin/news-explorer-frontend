@@ -8,6 +8,7 @@ import Header from '../Header/Header';
 import SavedNews from '../SavedNews/SavedNews';
 import Signin from '../Signin/Signin';
 import Signup from '../Signup/Signup';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { cards, user, errors } from '../../utils/constants';
 
 function App() {
@@ -20,7 +21,9 @@ function App() {
   const [errorMessageName, setErrorMessageName] = useState('');
 
 
-  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState();
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
   const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [foundCards, setFoundCards] = useState([]);
@@ -55,6 +58,8 @@ function App() {
 
   function closeAllPopups() {
     setIsLoginPopupOpen(false);
+    setIsSignupPopupOpen(false);
+    setInfoTooltipOpen(false);
   }
 
   function searchCards(keyWord) {
@@ -76,7 +81,7 @@ function App() {
     setIsPreloderOpen(true);
     setTimeout(searchCards, 3000, keyWord);
   }
-  // валидация сложноватая, буду упрощать
+  // валидация громоздкая, буду упрощать
   function validateInput(fildName, input) {
     switch (fildName) {
       case 'email':
@@ -107,8 +112,20 @@ function App() {
     closeAllPopups();
   }
 
-  function handleSiginup() {
-    closeAllPopups();
+  function handleSignup() {
+    setInfoTooltipOpen(true);
+    setIsSignupPopupOpen(false);
+  }
+
+  function openPopapSign() {
+    if (isLoginPopupOpen) {
+      setIsLoginPopupOpen(false);
+      setIsSignupPopupOpen(true);
+    } else {
+      setIsLoginPopupOpen(true);
+      setIsSignupPopupOpen(false);
+      setInfoTooltipOpen(false);
+    }
   }
 
   return (
@@ -129,31 +146,7 @@ function App() {
               isFound={notFound}
               cardsListOpen={openCards}
             />
-            <Route path="/signup">
-            <Signup
-          onClose={closeAllPopups}
-          isOpen={isLoginPopupOpen}
-          inputValidation={validateInput}
-          errorMessageEmail={errorMessageEmail}
-          errorMessagePass={errorMessagePass}
-          errorMessageName={errorMessageName}
-          isValidEmail={isValidEmail}
-          isValidPass={isValidPass}
-          isValidName={isValidName}
-          handleSiginup={handleSiginup}
-        />
-            </Route>
           </Route>
-          {/* <Route path="/siginup">
-            children={(isLoginPopupOpen) => {
-              return (
-                <Signup
-                  onClose={closeAllPopups}
-                  isOpen={isLoginPopupOpen}
-                />
-              )
-            }}
-          </Route> */}
           <Route path="/saved-news">
             <Header
               openPopapSign={() => setIsLoginPopupOpen(true)}
@@ -171,16 +164,34 @@ function App() {
           </Route>
         </Switch>
         <Signin
-                onClose={closeAllPopups}
-                isOpen={isLoginPopupOpen}
-                inputValidation={validateInput}
-                errorMessageEmail={errorMessageEmail}
-                errorMessagePass={errorMessagePass}
-                isValidEmail={isValidEmail}
-                isValidPass={isValidPass}
-                handleSignin={handleSignin}
-              />
-        
+          onClose={closeAllPopups}
+          isOpen={isLoginPopupOpen}
+          inputValidation={validateInput}
+          errorMessageEmail={errorMessageEmail}
+          errorMessagePass={errorMessagePass}
+          isValidEmail={isValidEmail}
+          isValidPass={isValidPass}
+          handleSignin={handleSignin}
+          openPopapSign={openPopapSign}
+        />
+        <Signup
+          onClose={closeAllPopups}
+          isOpen={isSignupPopupOpen}
+          inputValidation={validateInput}
+          errorMessageEmail={errorMessageEmail}
+          errorMessagePass={errorMessagePass}
+          errorMessageName={errorMessageName}
+          isValidEmail={isValidEmail}
+          isValidPass={isValidPass}
+          isValidName={isValidName}
+          handleSignup={handleSignup}
+          openPopapSign={openPopapSign}
+        />
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopups}
+          openPopapSign={openPopapSign}
+        />
         <Footer />
       </div>
     </div>

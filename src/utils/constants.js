@@ -1,4 +1,7 @@
-const user = { name: "Стасон" }
+const user = {
+    name: "Стасон",
+    email: "mail@mail.ru"
+}
 const cards = [
     {
         keyWord: "Ладога",

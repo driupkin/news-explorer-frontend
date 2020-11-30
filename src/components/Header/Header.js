@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
 function Header(props) {
-
-    const { path, url } = useRouteMatch();
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -53,10 +51,11 @@ function Header(props) {
                                     : ''}`
                             }>Сохранённые статьи</Link>
                         : ''}
-                    <Link to={`${url}/signin`}
-                        className={`header__button ${props.isSevedNews ? 'header__button_theme_white' : ''}`}
-                        // onClick={handelOpenPopap}
-                        
+                    <button
+                        className={`header__button ${props.isSevedNews
+                            ? 'header__button_theme_white'
+                            : ''}`}
+                        onClick={handelOpenPopap}
                     >{props.buttonName}
                         <div
                             className={
@@ -65,7 +64,7 @@ function Header(props) {
                             ${props.isSevedNews ? 'header__button-icon_theme_white' : ''}`
                             }>
                         </div>
-                    </Link>
+                    </button>
                 </div>
             </Navigation>
             <button

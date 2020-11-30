@@ -46,10 +46,21 @@
     font-size: 24px;
     line-height: 28px;
     color: #1A1B22;
+    margin: 0;
 }
 
-.popup_subtitle {
-    align-self: center;
+.popup__subtitle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.popup__subtitle-container_info {
+    justify-content: flex-start;
+}
+
+.popup__subtitle {
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -58,7 +69,10 @@
     text-align: center;
     color: #000000;
     margin: 0;
-    margin-top: 16px;
+}
+
+.popup__subtitle_info {
+    display: none;
 }
 
 .popup__link {
@@ -71,6 +85,16 @@
     line-height: 17px;
     letter-spacing: 0em;
     text-align: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+}
+
+.popup__link_info {
+    font-size: 18px;
+    line-height: 22px;
 }
 
 .form {
@@ -98,6 +122,10 @@
     justify-content: center;
     color: #FFFFFF;
     margin-top: 39px;
+}
+
+.form__button_info {
+    display: none;
 }
 
 .form__button_inactive {

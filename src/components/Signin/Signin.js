@@ -27,7 +27,7 @@ function Signin(props) {
 
     return (
         <PopupWithForm
-            tiltle={'Вход'}
+            title={'Вход'}
             inputName={''}
             buttonName={'Войти'}
             linkName={'Зарегистрироваться'}
@@ -36,6 +36,7 @@ function Signin(props) {
             onClose={props.onClose}
             isValid={isValid}
             onChangeData={props.handleSignin}
+            openPopapSign={props.openPopapSign}
         >
             <h2 className="form__title">Email</h2>
             <input

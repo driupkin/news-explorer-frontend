@@ -8,6 +8,10 @@ function PopupWithForm(props) {
         props.onChangeData();
     }
 
+    function handelOpenPopap() {
+        props.openPopapSign();
+    }
+
     return (
         <section className={`popup ${props.isOpen ? 'popup_opened' : ''}`}>
             <div className="popup__container">
@@ -15,18 +19,26 @@ function PopupWithForm(props) {
                     className="popup__button"
                     onClick={props.onClose}
                 />
-                <h2 className="popup__title">{props.tiltle}</h2>
+                <h2 className="popup__title">{props.title}</h2>
                 <form className="form" onSubmit={handleSubmit}>
                     <fieldset className="form__field">
-                        <div className="form__input-container">                            
+                        <div className="form__input-container">
                             {props.children}
                         </div>
                     </fieldset>
-                    <button className={`form__button ${props.isValid ? '' : 'form__button_inactive'}`}>{props.buttonName}</button>
+                    <button className={`form__button form__button_${props.modName}
+                    ${props.isValid 
+                    ? '' 
+                    : 'form__button_inactive'}`}>{props.buttonName}</button>
                 </form>
-                <p className="popup_subtitle">или&ensp;
-                    <a className="popup__link" href={props.link}>{props.linkName}</a>
-                </p>
+                <div className={`popup__subtitle-container popup__subtitle-container_${props.modName}`}>
+                    <p className={`popup__subtitle popup__subtitle_${props.modName}`}>или&ensp;</p>
+                    <button
+                        className={`popup__link popup__link_${props.modName}`}
+                        // href={props.link}
+                        onClick={handelOpenPopap}
+                    >{props.linkName}</button>
+                </div>
             </div>
         </section>
 
