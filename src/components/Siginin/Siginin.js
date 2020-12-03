@@ -1,31 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 function Siginin(props) {
 
-    const [inputValues, setInputValues] = useState({});
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [fildName, setFildName] = useState('');
 
-    const arr = Object.keys(inputValues);
-    const fildName = arr.shift();
+    console.log(fildName);
 
     function handleChangeData(e) {
-        const name = e.target.name;
+        const name = e.target.name; console.log(name);
         const value = e.target.value;
-        setInputValues({ [name]: value });
-        props.inputValidation(fildName, value);
+        switch (name) {
+            case 'email':
+                setEmail(value);
+                setFildName(name);
+                break;
+            case 'password':
+                setPassword(value);
+                setFildName(name);
+                break;
+            default:
+                break;
+        }
+        // name === 'email' && setEmail(value) && setFildName(name);
+        // name === 'password' && setPassword(value) && setFildName(name);
+        props.inputValidation(name, value);
     }
 
     const inputs = [
         {
             inputName: "Email",
             inputType: "email",
-            value: inputValues.email,
+            value: email,
             name: "email"
         },
         {
             inputName: "Пароль",
             inputType: "text",
-            value: inputValues.password,
+            value: password,
             name: "password"
         },
     ];

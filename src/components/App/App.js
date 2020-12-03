@@ -108,11 +108,14 @@ function App() {
   }
 
   function validateInput(fildName, input) {
-    console.log(fildName);
     switch (fildName) {
       case 'email':
         setIsValidInput(validator.isEmail(input));
         setErrorMessege(errors.email);
+        break;
+      case 'password':
+        setIsValidInput(input.length > 2);
+        setErrorMessege(errors.password);
         break;
       default:
         break;
