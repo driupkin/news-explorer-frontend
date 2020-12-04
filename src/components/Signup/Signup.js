@@ -9,27 +9,17 @@ function Signup(props) {
     const [isValid, setIsValid] = useState(false)
 
     useEffect(() => {
-        props.isValidEmail && props.isValidPass && props.isValidName && setIsValid(true);
-    }, [props.isValidEmail, props.isValidName, props.isValidPass])
+        (props.isValidEmail && props.isValidPass && props.isValidName)
+            ? setIsValid(true)
+            : setIsValid(false);
+    }, [props.isValidEmail, props.isValidName, props.isValidPass]);
 
-    function handleChangeEmail(e) {
+    function handleChangeData(e) {
         const name = e.target.name;
         const value = e.target.value;
-        setEmail(value);
-        props.inputValidation(name, value);
-    }
-
-    function handleChangePassword(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        setPassword(value);
-        props.inputValidation(name, value);
-    }
-
-    function handleChangeName(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        setName(value);
+        name === 'email' && setEmail(value);
+        name === 'password' && setPassword(value);
+        name === 'name' && setName(value);
         props.inputValidation(name, value);
     }
 
@@ -51,7 +41,7 @@ function Signup(props) {
                 value={email}
                 className="form__input"
                 type="email"
-                onChange={handleChangeEmail}
+                onChange={handleChangeData}
                 name="email"
                 placeholder="Введите почту"
             />
@@ -65,7 +55,7 @@ function Signup(props) {
                 value={password}
                 className="form__input"
                 type="password"
-                onChange={handleChangePassword}
+                onChange={handleChangeData}
                 name="password"
                 placeholder="Введите пароль"
             />
@@ -79,7 +69,7 @@ function Signup(props) {
                 value={name}
                 className="form__input"
                 type="text"
-                onChange={handleChangeName}
+                onChange={handleChangeData}
                 name="name"
                 placeholder="Введите имя"
             />
