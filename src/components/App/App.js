@@ -19,6 +19,8 @@ function App() {
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
   const [errorMessagePass, setErrorMessagePass] = useState('');
   const [errorMessageName, setErrorMessageName] = useState('');
+  const [isValid, setIsValid] = useState(false)
+
 
 
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
@@ -171,6 +173,7 @@ function App() {
           errorMessagePass={errorMessagePass}
           isValidEmail={isValidEmail}
           isValidPass={isValidPass}
+          isValid={isValid}
           handleSignin={handleSignin}
           openPopapSign={openPopapSign}
         />

@@ -5,23 +5,19 @@ function Signin(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isValid, setIsValid] = useState(false)
+    const [isValid, setIsValid] = useState(false);
 
     useEffect(() => {
-        props.isValidEmail && props.isValidPass && setIsValid(true);
-    }, [props.isValidEmail, props.isValidPass])
+        props.isValidEmail && props.isValidPass
+            ? setIsValid(true)
+            : setIsValid(false);
+    }, [props.isValidEmail, props.isValidPass]);
 
-    function handleChangeEmail(e) {
+    function handleChangeData(e) {
         const name = e.target.name;
         const value = e.target.value;
-        setEmail(value);
-        props.inputValidation(name, value);
-    }
-
-    function handleChangePassword(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        setPassword(value);
+        name === 'email' && setEmail(value);
+        name === 'password' && setPassword(value);
         props.inputValidation(name, value);
     }
 
@@ -43,7 +39,7 @@ function Signin(props) {
                 value={email}
                 className="form__input"
                 type="email"
-                onChange={handleChangeEmail}
+                onChange={handleChangeData}
                 name="email"
                 placeholder="Введите почту"
             />
@@ -57,7 +53,7 @@ function Signin(props) {
                 value={password}
                 className="form__input"
                 type="password"
-                onChange={handleChangePassword}
+                onChange={handleChangeData}
                 name="password"
                 placeholder="Введите пароль"
             />
