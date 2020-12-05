@@ -9,8 +9,9 @@ import SavedNews from '../SavedNews/SavedNews';
 import Signin from '../Signin/Signin';
 import Signup from '../Signup/Signup';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import { cards, user, errors } from '../../utils/constants';
+import { user, errors } from '../../utils/constants';
 import * as NewsApi from '../../utils/NewsApi';
+import * as MainApi from '../../utils/MainApi';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
   const [errorMessagePass, setErrorMessagePass] = useState('');
   const [errorMessageName, setErrorMessageName] = useState('');
-
+  const [errorMessageInvalid, setErrorMessageInvalid] = useState('');
 
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
@@ -32,11 +33,11 @@ function App() {
   const [openCards, setOpenCards] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
-  useEffect(() => {
-    setOpenCards(true);
-    const articles = localStorage.getItem('articles')
-    setFoundCards(JSON.parse(articles));
-  }, []);
+  // useEffect(() => {
+  //   setOpenCards(true);
+  //   const articles = localStorage.getItem('articles')
+  //   setFoundCards(JSON.parse(articles));
+  // }, []);
 
   useEffect(() => {
     function closeAllPopupsByOverlay(e) {
@@ -57,18 +58,18 @@ function App() {
     }
   });
 
-  useEffect(() => {
-    if (isAuthorized) {
-      return setHeaderButtonName(user.name);
-    }
-  }, [isAuthorized])
+  // useEffect(() => {
+  //   if (isAuthorized) {
+  //     return setHeaderButtonName(user.name);
+  //   }
+  // }, [isAuthorized])
 
   function closeAllPopups() {
     setIsLoginPopupOpen(false);
     setIsSignupPopupOpen(false);
     setInfoTooltipOpen(false);
   }
-
+  // поиск новостей
   function searchCards(keyWord) {
     NewsApi.getNews(keyWord)
       .then(news => {
@@ -115,14 +116,47 @@ function App() {
     }
   }
 
-  function handleSignin() {
-    setIsAuthorized(true);
-    closeAllPopups();
+  function tokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    return jwt;
   }
 
-  function handleSignup() {
-    setInfoTooltipOpen(true);
-    setIsSignupPopupOpen(false);
+  function handleSignin(email, password) {
+    MainApi.authorize(email, password)
+      .then(data => {
+        if (data.token) {
+          MainApi.getUser(tokenCheck(), 'users/me')
+            .then((res) => {
+              if (res) {
+                setHeaderButtonName(res.name);
+                console.log(res)
+              }
+            })
+          setIsAuthorized(true);
+          closeAllPopups();
+        }
+      })
+      .catch((err) => {
+        setErrorMessageInvalid(err);
+        console.log(errorMessageInvalid);
+      });
+
+    return;
+  }
+
+  function handleSignup(email, password, name) {
+    MainApi.register(email, password, name)
+      .then(data => {
+        if (data) {
+          setInfoTooltipOpen(true);
+          setIsSignupPopupOpen(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    return;
   }
 
   function openPopapSign() {
@@ -158,13 +192,13 @@ function App() {
           <Route path="/saved-news">
             <Header
               openPopapSign={() => setIsLoginPopupOpen(true)}
-              buttonName={user.name}
+              buttonName={HeaderButtonName}
               isSevedNews={true}
               isAuthorized={true}
             />
             <SavedNews
               user={user}
-              cards={cards}
+              cards={[]}
               isSevedNews={true}
               isAuthorized={isAuthorized}
               cardsListOpen={true}
@@ -177,9 +211,10 @@ function App() {
           inputValidation={validateInput}
           errorMessageEmail={errorMessageEmail}
           errorMessagePass={errorMessagePass}
+          errorMessageInvalid={errorMessageInvalid}
           isValidEmail={isValidEmail}
           isValidPass={isValidPass}
-          handleSignin={handleSignin}
+          onChangeData={handleSignin}
           openPopapSign={openPopapSign}
         />
         <Signup
@@ -189,10 +224,11 @@ function App() {
           errorMessageEmail={errorMessageEmail}
           errorMessagePass={errorMessagePass}
           errorMessageName={errorMessageName}
+          errorMessageInvalid={errorMessageInvalid}
           isValidEmail={isValidEmail}
           isValidPass={isValidPass}
           isValidName={isValidName}
-          handleSignup={handleSignup}
+          onChangeData={handleSignup}
           openPopapSign={openPopapSign}
         />
         <InfoTooltip

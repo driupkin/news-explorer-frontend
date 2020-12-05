@@ -23,6 +23,11 @@ function Signup(props) {
         props.inputValidation(name, value);
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        props.onChangeData(email, password, name);
+    }
+
     return (
         <PopupWithForm
             title={'Регистрация'}
@@ -33,7 +38,8 @@ function Signup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             isValid={isValid}
-            onChangeData={props.handleSignup}
+            onSubmit={handleSubmit}
+            // onChangeData={props.handleSignup}
             openPopapSign={props.openPopapSign}
         >
             <h2 className="form__title">Email</h2>

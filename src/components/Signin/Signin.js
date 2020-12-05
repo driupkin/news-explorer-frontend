@@ -20,6 +20,12 @@ function Signin(props) {
         name === 'password' && setPassword(value);
         props.inputValidation(name, value);
     }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        props.onChangeData(email, password);
+    }
+
     return (
         <PopupWithForm
             title={'Вход'}
@@ -30,8 +36,10 @@ function Signin(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             isValid={isValid}
-            onChangeData={props.handleSignin}
+            onSubmit={handleSubmit}
+            // onChangeData={props.handleSignin}
             openPopapSign={props.openPopapSign}
+            errorMessageInvalid={props.errorMessageInvalid}
         >
             <h2 className="form__title">Email</h2>
             <input

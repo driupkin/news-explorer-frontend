@@ -102,6 +102,18 @@
     flex-direction: column;
 }
 
+.form__error {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #FF0000;
+    height: 15px;
+    margin-top: 10px;
+}
+
 .form__button {
     height: 64px;
     width: 100%;
@@ -121,7 +133,7 @@
     text-align: center;
     justify-content: center;
     color: #FFFFFF;
-    margin-top: 39px;
+    margin-top: 8px;
 }
 
 .form__button_info {
