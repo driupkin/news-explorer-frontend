@@ -33,6 +33,12 @@ function App() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
+    setOpenCards(true);
+    const articles = localStorage.getItem('articles')
+    setFoundCards(JSON.parse(articles));
+  }, []);
+
+  useEffect(() => {
     function closeAllPopupsByOverlay(e) {
       if (e.target.classList.contains('popup_opened'))
         closeAllPopups();
@@ -66,11 +72,12 @@ function App() {
   function searchCards(keyWord) {
     NewsApi.getNews(keyWord)
       .then(news => {
-        // console.log(news.articles);
         const foundCards = news.articles;
         return foundCards;
       })
-      .then(foundCards => { console.log(foundCards);
+      .then(foundCards => {
+        console.log(foundCards);
+        localStorage.setItem('articles', JSON.stringify(foundCards))
         setIsPreloderOpen(false);
         setOpenCards(true);
         if (foundCards.length === 0) {
@@ -78,7 +85,6 @@ function App() {
           setOpenCards(false);
           // Возможно нужен выход в catch
         }
-        localStorage.setItem('articles', foundCards);
         return setFoundCards(foundCards);
       })
   };
@@ -89,26 +95,20 @@ function App() {
     setIsPreloderOpen(true);
     searchCards(keyWord);
   }
-
+  // валидация форм
   function validateInput(fildName, input) {
     switch (fildName) {
       case 'email':
         setIsValidEmail(validator.isEmail(input));
-        if (!isValidEmail) {
-          setErrorMessageEmail(errors.email);
-        }
+        !isValidEmail && setErrorMessageEmail(errors.email);
         break;
       case 'password':
         setIsValidPass(input.match('^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])'));
-        if (!isValidPass) {
-          setErrorMessagePass(errors.password);
-        }
+        !isValidPass && setErrorMessagePass(errors.password);
         break;
       case 'name':
         setIsValidName(input.length > 2);
-        if (!isValidName) {
-          setErrorMessageName(errors.name);
-        }
+        !isValidName && setErrorMessageName(errors.name);
         break;
       default:
         break;

@@ -1,9 +1,10 @@
 export const getNews = (keyWord) => {
-    const date = new Date;
-    return fetch(`https://newsapi.org/v2/everything?q=${keyWord}&` +
+    const nowDate = new Date();
+    return fetch('https://newsapi.org/v2/everything?' +
+        `q=${keyWord}&` +
         'pageSize=100&' +
         'from=2020-12-01&' +
-        `to=${date}`,
+        `to=${nowDate}`,
         {
             method: 'GET',
             headers: {
@@ -13,6 +14,10 @@ export const getNews = (keyWord) => {
         .then(res => {
             if (res.ok) {
                 return res.json();
+            } else {
+                return res.json()
+                    .then(data => Promise.reject(data.message))
             }
         })
+        .catch(err => Promise.reject(err.message));
 }

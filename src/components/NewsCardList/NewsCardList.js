@@ -31,10 +31,11 @@ function NewsCardList(props) {
                         ))}
                     </div>
                     <button
-                    onClick={() => setCountCards(countCards + 3)}
-                        className={`elements__button ${props.isSevedNews
-                            ? 'elements__button_none'
-                            : ''}`}>Показать еще</button>
+                        onClick={() => setCountCards(countCards + 3)}
+                        className={`elements__button 
+                        ${(props.isSevedNews || props.cards.length <= countCards)
+                                ? 'elements__button_none'
+                                : ''}`}>Показать еще</button>
                 </section>
                 : ''
             }

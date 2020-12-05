@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import moment from 'moment/min/moment-with-locales'
 import './NewsCard.css';
 
 function NewsCard(props) {
 
     const [onHover, setOnHover] = useState();
     const [isFavor, setIsFavor] = useState(false);
-// вр`еменная функция проверки сохранения карточки
+    // вр`еменная функция проверки сохранения карточки
     function addFavor() {
         if (isFavor) {
             setIsFavor(false);
@@ -13,12 +14,12 @@ function NewsCard(props) {
             setIsFavor(true);
         }
     }
-
+    // перевод даты в формат по макету
     function getDate() {
-      const date = new Date(2020, 12, 4);
-      return date;  
+        const date = new Date(props.card.publishedAt);
+        return moment(date).subtract(1, "days").locale('ru').format('d MMMM, yyyy');
     }
-    // props.card.publishedAt
+
     return (
         <div className="card">
             <div className={`card__key-word-container ${props.isSevedNews ? 'card__key-word-container_opened' : ''}`}>
@@ -29,13 +30,15 @@ function NewsCard(props) {
                     className={`card__popup ${(!props.isAuthorized && onHover) ? 'card__popup_opened' : ''}`}
                 >{props.isSevedNews ? 'Убрать из сохранённых' : 'Войдите, чтобы сохранять статьи'}</h3>
                 <button
-                onClick={addFavor}
+                    type='button'
+                    name='icon'
+                    onClick={addFavor}
                     onMouseOut={() => setOnHover(false)}
                     onMouseOver={() => setOnHover(true)}
                     className={`card__icon 
                     ${props.isSevedNews
                             ? 'card__trash-icon'
-                            : `card__fevor-icon ${isFavor
+                            : `card__fevor-icon ${(isFavor && props.isAuthorized)
                                 ? 'card__fevor-icon_active'
                                 : ''}`}`}
                 />
@@ -46,10 +49,14 @@ function NewsCard(props) {
                 src={`${props.card.urlToImage}`}
             />
             <div className="card__text">
-                <div className="card__date">{`${new Date(2020, 12, 4)}`}</div>
+                <div className="card__date">{`${getDate()}`}</div>
                 <h2 className="card__title">{props.card.title}</h2>
                 <p className="card__paragraph">{props.card.description}</p>
-                <div className="card__subtitle">{props.card.source.name}</div>
+                <a
+                    className="card__subtitle"
+                    target="blank"
+                    href={`${props.card.url}`}
+                >{props.card.source.name}</a>
             </div>
         </div>
     )
