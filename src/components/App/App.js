@@ -10,6 +10,7 @@ import Signin from '../Signin/Signin';
 import Signup from '../Signup/Signup';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { cards, user, errors } from '../../utils/constants';
+import * as NewsApi from '../../utils/NewsApi';
 
 function App() {
 
@@ -63,25 +64,32 @@ function App() {
   }
 
   function searchCards(keyWord) {
-    const foundCards = cards.filter((card) => {
-      return card.keyWord.toLowerCase() === keyWord.toLowerCase();
-    });
-    setIsPreloderOpen(false);
-    setOpenCards(true);
-    if (foundCards.length === 0) {
-      setNotFound(true);
-      setOpenCards(false);
-    }
-    return setFoundCards(foundCards);
+    NewsApi.getNews(keyWord)
+      .then(news => {
+        // console.log(news.articles);
+        const foundCards = news.articles;
+        return foundCards;
+      })
+      .then(foundCards => { console.log(foundCards);
+        setIsPreloderOpen(false);
+        setOpenCards(true);
+        if (foundCards.length === 0) {
+          setNotFound(true);
+          setOpenCards(false);
+          // Возможно нужен выход в catch
+        }
+        localStorage.setItem('articles', foundCards);
+        return setFoundCards(foundCards);
+      })
   };
 
   function handleSearch(keyWord) {
     setOpenCards(false);
     setNotFound(false);
     setIsPreloderOpen(true);
-    setTimeout(searchCards, 3000, keyWord);
+    searchCards(keyWord);
   }
-  // валидация громоздкая, буду упрощать
+
   function validateInput(fildName, input) {
     switch (fildName) {
       case 'email':

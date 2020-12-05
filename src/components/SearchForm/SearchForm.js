@@ -3,7 +3,7 @@ import './SearchForm.css';
 
 function SearchForm(props) {
 
-    const [keyWord, setKeyWord] = useState('ладога');
+    const [keyWord, setKeyWord] = useState('');
 
     function handeleKeyWordchange(e) {
         setKeyWord(e.target.value);

@@ -14,6 +14,11 @@ function NewsCard(props) {
         }
     }
 
+    function getDate() {
+      const date = new Date(2020, 12, 4);
+      return date;  
+    }
+    // props.card.publishedAt
     return (
         <div className="card">
             <div className={`card__key-word-container ${props.isSevedNews ? 'card__key-word-container_opened' : ''}`}>
@@ -38,13 +43,13 @@ function NewsCard(props) {
             <img
                 className="card__image"
                 alt="Изображение новости"
-                src="https://a.d-cd.net/77eeb6ds-1920.jpg"
+                src={`${props.card.urlToImage}`}
             />
             <div className="card__text">
-                <div className="card__date">{props.card.date}</div>
+                <div className="card__date">{`${new Date(2020, 12, 4)}`}</div>
                 <h2 className="card__title">{props.card.title}</h2>
-                <p className="card__paragraph">{props.card.paragraph}</p>
-                <div className="card__subtitle">{props.card.subtitle}</div>
+                <p className="card__paragraph">{props.card.description}</p>
+                <div className="card__subtitle">{props.card.source.name}</div>
             </div>
         </div>
     )
