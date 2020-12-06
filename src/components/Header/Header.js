@@ -6,7 +6,6 @@ import Navigation from '../Navigation/Navigation';
 function Header(props) {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isSevedNews, setIsSevedNews] = useState(false);
 
     function handleOpenMenu() {
         if (isOpen) {
@@ -20,15 +19,18 @@ function Header(props) {
         setIsOpen(false);
     }
 
+    function handleSignOut() {
+        props.signOut();
+    }
+
     return (
         <header className={`header 
-        ${isSevedNews ? 'header_theme_white' : ''}
-        ${isOpen ? `header_menu_opened ${isSevedNews ? 'header_theme_white_opened' : ''}` : ''}
+        ${props.isSevedNews ? 'header_theme_white' : ''}
+        ${isOpen ? `header_menu_opened ${props.isSevedNews ? 'header_theme_white_opened' : ''}` : ''}
         `}>
             <Link
-                onClick={() => setIsSevedNews(false)}
                 to="/"
-                className={`header__logo ${isSevedNews ? 'header__logo_theme_white' : ''}`}
+                className={`header__logo ${props.isSevedNews ? 'header__logo_theme_white' : ''}`}
 
             />
             <Navigation
@@ -36,36 +38,35 @@ function Header(props) {
                 isOpen={isOpen} >
                 <div
                     className={`header__links-container 
-                ${isSevedNews ? 'header__links-container_theme_white' : ''}`}>
+                ${props.isSevedNews ? 'header__links-container_theme_white' : ''}`}>
                     <Link
-                        onClick={() => setIsSevedNews(false)}
                         to="/"
-                        className={`header__link ${isSevedNews
+                        className={`header__link ${props.isSevedNews
                             ? 'header__link_theme_white'
                             : 'header__link_undeline'}`
                         }>Главная</Link>
                     {props.isAuthorized
-                        ? <Link
-                            onClick={() => setIsSevedNews(true)}
-                            to="/saved-news"
+                        ? <a
+                            href='/saved-news'
+                            // to="/saved-news"
                             className={
                                 `header__link 
-                        ${isSevedNews
+                        ${props.isSevedNews
                                     ? 'header__link_theme_white header__link_undeline'
                                     : ''}`
-                            }>Сохранённые статьи</Link>
+                            }>Сохранённые статьи</a>
                         : ''}
                     <button
-                        className={`header__button ${isSevedNews
+                        className={`header__button ${props.isSevedNews
                             ? 'header__button_theme_white'
                             : ''}`}
-                        onClick={handelOpenPopap}
+                        onClick={props.isAuthorized ? handleSignOut : handelOpenPopap}
                     >{props.buttonName}
                         <span
                             className={
                                 `header__button-icon 
                             ${props.isAuthorized ? 'header__button-icon_authorized' : ''}
-                            ${isSevedNews ? 'header__button-icon_theme_white' : ''}`
+                            ${props.isSevedNews ? 'header__button-icon_theme_white' : ''}`
                             }>
                         </span>
                     </button>
@@ -74,7 +75,7 @@ function Header(props) {
             <button
                 className={`header__button-popup 
             ${isOpen ? 'header__button-popup_opened' : ''}
-            ${isSevedNews ? 'header__button-popup_theme_white' : ''}`}
+            ${props.isSevedNews ? 'header__button-popup_theme_white' : ''}`}
                 onClick={handleOpenMenu} />
         </header>
     )

@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
-import moment from 'moment/min/moment-with-locales'
+import React, { useEffect, useState } from 'react';
+import moment from 'moment/min/moment-with-locales';
+import { CardsContext } from '../../context/CardsContext';
 import './NewsCard.css';
 
 function NewsCard(props) {
 
+    const currentCard = React.useContext(CardsContext);
     const [onHover, setOnHover] = useState();
-    const [isFavor, setIsFavor] = useState(false);
-    // вр`еменная функция проверки сохранения карточки
+    const isFavor = currentCard.some(i => i.url === props.card.url);
+
     function handelIconClick() {
-        if (isFavor) {
-            setIsFavor(false);
-        } else {
-            setIsFavor(true);
-            props.onCardIconClick(props.card);
-        }
+        props.onCardIconClick(props.card);
     }
+
     // перевод даты в формат по макету
     function getDate() {
         const date = new Date(props.card.publishedAt);

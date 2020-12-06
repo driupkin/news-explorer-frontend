@@ -92,8 +92,20 @@ export const addCard = (values, keyWord, token, rout) => {
             title: values.title,
             description: values.description,
             url: values.url,
-            source:values.source,
+            source: values.source,
         })
+    })
+        .then(handleResponse)
+        .catch(handleResponseError)
+}
+
+export const deleteCard = (token, rout, id) => {
+    return fetch(`${BASE_URL}/${rout}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
     })
         .then(handleResponse)
         .catch(handleResponseError)

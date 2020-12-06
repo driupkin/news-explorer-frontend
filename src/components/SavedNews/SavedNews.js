@@ -1,8 +1,11 @@
 import React from 'react';
 import './SavedNews.css';
 import NewsCardList from '../NewsCardList/NewsCardList';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 function SavedNews(props) {
+
+    const currentUser = React.useContext(CurrentUserContext);
     // функция отдаёт 2 первых ключевых слова из массива карточек
     const handleKeyWords = () => {
         const keyWords = props.cards.map((card => {
@@ -25,7 +28,7 @@ function SavedNews(props) {
         <div>
             <section className="author-data">
                 <h2 className="author-data__title">Сохранённые статьи</h2>
-                <p className="author-data__articles">{props.user.name}, у вас {props.cards.length} сохранённых статей</p>
+                <p className="author-data__articles">{currentUser.name}, у вас {props.cards.length} сохранённых статей</p>
                 <p className="author-data__subtitle">По ключевым словам: {handleKeyWords()}</p>
             </section>
             <NewsCardList
@@ -34,6 +37,7 @@ function SavedNews(props) {
                 isSevedNews={props.isSevedNews}
                 cards={props.cards}
                 isOpen={props.cardsListOpen}
+                onCardIconClick={props.onCardIconClick}
             />
         </div>
     )

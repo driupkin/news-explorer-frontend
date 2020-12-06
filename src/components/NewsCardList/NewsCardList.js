@@ -24,6 +24,7 @@ function NewsCardList(props) {
                         {props.isSevedNews
                             ? props.cards.map((card, i) => (
                                 <NewsCard
+                                    isFavor={props.isFavor}
                                     onCardIconClick={props.onCardIconClick}
                                     isAuthorized={props.isAuthorized}
                                     isSevedNews={props.isSevedNews}

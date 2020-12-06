@@ -17,8 +17,7 @@ function Main(props) {
                 onCardIconClick={props.onCardIconClick}
                 isAuthorized={props.isAuthorized}
                 cards={props.cards}
-                isOpen={props.cardsListOpen}
-            >
+                isOpen={props.cardsListOpen}          >
                 <h2 className="elements__title">Результаты поиска</h2>
             </NewsCardList>
             <Preloader

@@ -1,16 +1,19 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import validator from 'validator';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import SavedNews from '../SavedNews/SavedNews';
+import SavedNewsPage from '../SavedNewsPage/SavedNewsPage';
 import Signin from '../Signin/Signin';
 import Signup from '../Signup/Signup';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { user, errors } from '../../utils/constants';
+import { errors } from '../../utils/constants';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { CardsContext } from '../../context/CardsContext';
 import * as NewsApi from '../../utils/NewsApi';
 import * as MainApi from '../../utils/MainApi';
 
@@ -35,6 +38,13 @@ function App() {
   const [openCards, setOpenCards] = useState(false);
   const [notFound, setNotFound] = useState(false);
   const [isSevedNews, setIsSevedNews] = useState(false);
+  const [isFavor, setIsFavor] = useState(false);
+  const [currentUser, setCurrentUser] = React.useState({
+    email: '',
+    name: ''
+  });
+
+  const history = useHistory();
 
   // useEffect(() => {
   //   setOpenCards(true);
@@ -45,6 +55,7 @@ function App() {
   useEffect(() => {
     if (tokenCheck()) {
       getAllContent();
+      setIsAuthorized(true);
     }
   }, [])
 
@@ -72,6 +83,11 @@ function App() {
     setIsSignupPopupOpen(false);
     setInfoTooltipOpen(false);
   }
+
+  function addFavorite(cards) {
+
+  }
+
   // поиск новостей
   function searchCards(keyWord) {
     NewsApi.getNews(keyWord)
@@ -129,13 +145,7 @@ function App() {
     MainApi.authorize(email, password)
       .then(data => {
         if (data.token) {
-          MainApi.getUser(tokenCheck(), 'users/me')
-            .then((res) => {
-              if (res) {
-                setHeaderButtonName(res.name);
-                console.log(res)
-              }
-            })
+          getCurrentUser();
           setIsAuthorized(true);
           closeAllPopups();
         }
@@ -162,24 +172,55 @@ function App() {
   }
 
   function getAllContent() {
-    if (tokenCheck()) {
-      MainApi.getContent(tokenCheck(), 'articles')
-        .then(cards => {
-          setSevedCards(cards);
-          setHeaderButtonName(user.name);
-          setIsAuthorized(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      return;
-    }
+    MainApi.getContent(tokenCheck(), 'articles')
+      .then(cards => {
+        getCurrentUser();
+        setSevedCards(cards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return;
+  }
+
+  function getCurrentUser() {
+    MainApi.getUser(tokenCheck(), 'users/me')
+      .then((res) => {
+        if (res) {
+          setCurrentUser(res);
+          setHeaderButtonName(res.name);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return;
+  }
+
+  function signOut() {
+    localStorage.removeItem('jwt');
+    history.push('/');
+    setHeaderButtonName('Авторизоваться');
+    setIsAuthorized(false);
   }
   // сохранение и удаление карточек
   function handleCardIconClick(card) {
-    const keyWord = localStorage.getItem('keyWord');
-    MainApi.addCard(card, keyWord, tokenCheck(), 'articles')
-      .then(card => console.log('Избранная', card))
+    if (card.url === sevedCards.url) {
+      const keyWord = localStorage.getItem('keyWord');
+      MainApi.addCard(card, keyWord, tokenCheck(), 'articles')
+        .then()
+    } else {
+      MainApi.deleteCard(tokenCheck(), 'articles', card._id)
+        .then()
+    }
+  }
+
+  function handleDelCard(card) {
+    MainApi.deleteCard(tokenCheck(), 'articles', card._id)
+      .then(() => {
+        const newCards = sevedCards.filter(item => item._id === card._id ? '' : item);
+        setSevedCards(newCards);
+      })
   }
 
   function openPopapSign() {
@@ -194,75 +235,83 @@ function App() {
   }
 
   return (
-    <div className="root">
-      <div className="page">
-        <Switch>
-          <Route exact path="/">
-            <Header
-              openPopapSign={() => setIsLoginPopupOpen(true)}
-              buttonName={HeaderButtonName}
-              isAuthorized={isAuthorized}
+    <CurrentUserContext.Provider value={currentUser}>
+      <CardsContext.Provider value={sevedCards}>
+        <div className="root">
+          <div className="page">
+            <Switch>
+              <Route exact path="/">
+                <Header
+                  openPopapSign={() => setIsLoginPopupOpen(true)}
+                  buttonName={HeaderButtonName}
+                  isAuthorized={isAuthorized}
+                  signOut={signOut}
+                />
+                <Main
+                  isAuthorized={isAuthorized}
+                  searchByKeyword={handleSearch}
+                  cards={foundCards}
+                  isPreloderOpen={isPreloderOpen}
+                  isFound={notFound}
+                  cardsListOpen={openCards}
+                  onCardIconClick={handleCardIconClick}
+                />
+              </Route>
+              <ProtectedRoute exact path="/saved-news"
+                component={SavedNewsPage}
+                isAuthorized={isAuthorized}>
+                <Header
+                  openPopapSign={() => setIsLoginPopupOpen(true)}
+                  buttonName={HeaderButtonName}
+                  isSevedNews={true}
+                  isAuthorized={isAuthorized}
+                  signOut={signOut} />
+                <SavedNews
+                  cards={sevedCards}
+                  isSevedNews={true}
+                  isAuthorized={isAuthorized}
+                  cardsListOpen={true}
+                  onCardIconClick={handleDelCard}
+                />
+              </ProtectedRoute>
+            </Switch>
+
+            <Signin
+              onClose={closeAllPopups}
+              isOpen={isLoginPopupOpen}
+              inputValidation={validateInput}
+              errorMessageEmail={errorMessageEmail}
+              errorMessagePass={errorMessagePass}
+              errorMessageInvalid={errorMessageInvalid}
+              isValidEmail={isValidEmail}
+              isValidPass={isValidPass}
+              onChangeData={handleSignin}
+              openPopapSign={openPopapSign}
             />
-            <Main
-              isAuthorized={isAuthorized}
-              searchByKeyword={handleSearch}
-              cards={foundCards}
-              isPreloderOpen={isPreloderOpen}
-              isFound={notFound}
-              cardsListOpen={openCards}
-              onCardIconClick={handleCardIconClick}
+            <Signup
+              onClose={closeAllPopups}
+              isOpen={isSignupPopupOpen}
+              inputValidation={validateInput}
+              errorMessageEmail={errorMessageEmail}
+              errorMessagePass={errorMessagePass}
+              errorMessageName={errorMessageName}
+              errorMessageInvalid={errorMessageInvalid}
+              isValidEmail={isValidEmail}
+              isValidPass={isValidPass}
+              isValidName={isValidName}
+              onChangeData={handleSignup}
+              openPopapSign={openPopapSign}
             />
-          </Route>
-          {/* <ProtectedRoute exact path="/saved-news"
-            component={Header}
-            openPopapSign={() => setIsLoginPopupOpen(true)}
-            buttonName={HeaderButtonName}
-            isSevedNews={isSevedNews}
-            isAuthorized={true} >
-          </ProtectedRoute> */}
-          <ProtectedRoute exact path="/saved-news"
-            component={SavedNews}
-            user={user}
-            cards={sevedCards}
-            isSevedNews={isSevedNews}
-            isAuthorized={true}
-            cardsListOpen={true} >
-          </ProtectedRoute>
-        </Switch>
-        <Signin
-          onClose={closeAllPopups}
-          isOpen={isLoginPopupOpen}
-          inputValidation={validateInput}
-          errorMessageEmail={errorMessageEmail}
-          errorMessagePass={errorMessagePass}
-          errorMessageInvalid={errorMessageInvalid}
-          isValidEmail={isValidEmail}
-          isValidPass={isValidPass}
-          onChangeData={handleSignin}
-          openPopapSign={openPopapSign}
-        />
-        <Signup
-          onClose={closeAllPopups}
-          isOpen={isSignupPopupOpen}
-          inputValidation={validateInput}
-          errorMessageEmail={errorMessageEmail}
-          errorMessagePass={errorMessagePass}
-          errorMessageName={errorMessageName}
-          errorMessageInvalid={errorMessageInvalid}
-          isValidEmail={isValidEmail}
-          isValidPass={isValidPass}
-          isValidName={isValidName}
-          onChangeData={handleSignup}
-          openPopapSign={openPopapSign}
-        />
-        <InfoTooltip
-          isOpen={isInfoTooltipOpen}
-          onClose={closeAllPopups}
-          openPopapSign={openPopapSign}
-        />
-        <Footer />
-      </div>
-    </div>
+            <InfoTooltip
+              isOpen={isInfoTooltipOpen}
+              onClose={closeAllPopups}
+              openPopapSign={openPopapSign}
+            />
+            <Footer />
+          </div>
+        </div>
+      </CardsContext.Provider>
+    </CurrentUserContext.Provider >
   );
 }
 

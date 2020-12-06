@@ -98,6 +98,11 @@
     background-image: url('../../images/icon/add-fav-active.svg');
 }
 
+.card__fevor-icon_active:hover {
+    background-image: url('../../images/icon/add-fav-active.svg');
+    /* background-blend-mode: overlay; */
+}
+
 .card__trash-icon {
     background-image: url('../../images/icon/trash.svg');
 }
