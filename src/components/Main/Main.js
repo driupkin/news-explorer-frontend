@@ -14,6 +14,7 @@ function Main(props) {
             />
             <NotFound isOpen={props.isFound} />
             <NewsCardList
+                onCardIconClick={props.onCardIconClick}
                 isAuthorized={props.isAuthorized}
                 cards={props.cards}
                 isOpen={props.cardsListOpen}

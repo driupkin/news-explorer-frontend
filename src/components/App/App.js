@@ -9,6 +9,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import Signin from '../Signin/Signin';
 import Signup from '../Signup/Signup';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { user, errors } from '../../utils/constants';
 import * as NewsApi from '../../utils/NewsApi';
 import * as MainApi from '../../utils/MainApi';
@@ -29,15 +30,23 @@ function App() {
   const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [foundCards, setFoundCards] = useState([]);
+  const [sevedCards, setSevedCards] = useState([]);
   const [isPreloderOpen, setIsPreloderOpen] = useState();
   const [openCards, setOpenCards] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const [isSevedNews, setIsSevedNews] = useState(false);
 
   // useEffect(() => {
   //   setOpenCards(true);
   //   const articles = localStorage.getItem('articles')
   //   setFoundCards(JSON.parse(articles));
   // }, []);
+
+  useEffect(() => {
+    if (tokenCheck()) {
+      getAllContent();
+    }
+  }, [])
 
   useEffect(() => {
     function closeAllPopupsByOverlay(e) {
@@ -58,12 +67,6 @@ function App() {
     }
   });
 
-  // useEffect(() => {
-  //   if (isAuthorized) {
-  //     return setHeaderButtonName(user.name);
-  //   }
-  // }, [isAuthorized])
-
   function closeAllPopups() {
     setIsLoginPopupOpen(false);
     setIsSignupPopupOpen(false);
@@ -77,15 +80,16 @@ function App() {
         return foundCards;
       })
       .then(foundCards => {
-        console.log(foundCards);
-        localStorage.setItem('articles', JSON.stringify(foundCards))
-        setIsPreloderOpen(false);
-        setOpenCards(true);
         if (foundCards.length === 0) {
           setNotFound(true);
           setOpenCards(false);
           // Возможно нужен выход в catch
         }
+        console.log(foundCards);
+        localStorage.setItem('articles', JSON.stringify(foundCards));
+        localStorage.setItem('keyWord', keyWord);
+        setIsPreloderOpen(false);
+        setOpenCards(true);
         return setFoundCards(foundCards);
       })
   };
@@ -138,7 +142,6 @@ function App() {
       })
       .catch((err) => {
         setErrorMessageInvalid(err);
-        console.log(errorMessageInvalid);
       });
 
     return;
@@ -153,10 +156,30 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setErrorMessageInvalid(err);
       });
-
     return;
+  }
+
+  function getAllContent() {
+    if (tokenCheck()) {
+      MainApi.getContent(tokenCheck(), 'articles')
+        .then(cards => {
+          setSevedCards(cards);
+          setHeaderButtonName(user.name);
+          setIsAuthorized(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return;
+    }
+  }
+  // сохранение и удаление карточек
+  function handleCardIconClick(card) {
+    const keyWord = localStorage.getItem('keyWord');
+    MainApi.addCard(card, keyWord, tokenCheck(), 'articles')
+      .then(card => console.log('Избранная', card))
   }
 
   function openPopapSign() {
@@ -187,23 +210,24 @@ function App() {
               isPreloderOpen={isPreloderOpen}
               isFound={notFound}
               cardsListOpen={openCards}
+              onCardIconClick={handleCardIconClick}
             />
           </Route>
-          <Route path="/saved-news">
-            <Header
-              openPopapSign={() => setIsLoginPopupOpen(true)}
-              buttonName={HeaderButtonName}
-              isSevedNews={true}
-              isAuthorized={true}
-            />
-            <SavedNews
-              user={user}
-              cards={[]}
-              isSevedNews={true}
-              isAuthorized={isAuthorized}
-              cardsListOpen={true}
-            />
-          </Route>
+          {/* <ProtectedRoute exact path="/saved-news"
+            component={Header}
+            openPopapSign={() => setIsLoginPopupOpen(true)}
+            buttonName={HeaderButtonName}
+            isSevedNews={isSevedNews}
+            isAuthorized={true} >
+          </ProtectedRoute> */}
+          <ProtectedRoute exact path="/saved-news"
+            component={SavedNews}
+            user={user}
+            cards={sevedCards}
+            isSevedNews={isSevedNews}
+            isAuthorized={true}
+            cardsListOpen={true} >
+          </ProtectedRoute>
         </Switch>
         <Signin
           onClose={closeAllPopups}

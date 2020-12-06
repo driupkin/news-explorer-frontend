@@ -3,11 +3,6 @@ import './PopupWithForm.css';
 
 function PopupWithForm(props) {
 
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     props.onChangeData();
-    // }
-
     function handelOpenPopap() {
         props.openPopapSign();
     }
@@ -36,7 +31,6 @@ function PopupWithForm(props) {
                     <p className={`popup__subtitle popup__subtitle_${props.modName}`}>или&ensp;</p>
                     <button
                         className={`popup__link popup__link_${props.modName}`}
-                        // href={props.link}
                         onClick={handelOpenPopap}
                     >{props.linkName}</button>
                 </div>

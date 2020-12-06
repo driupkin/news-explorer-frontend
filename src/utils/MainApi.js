@@ -77,3 +77,24 @@ export const getContent = (token, rout) => {
         .then(data => { return data })
         .catch(handleResponseError);
 };
+
+export const addCard = (values, keyWord, token, rout) => {
+    return fetch(`${BASE_URL}/${rout}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            keyWord: keyWord,
+            urlToImage: values.urlToImage,
+            publishedAt: values.publishedAt,
+            title: values.title,
+            description: values.description,
+            url: values.url,
+            source:values.source,
+        })
+    })
+        .then(handleResponse)
+        .catch(handleResponseError)
+}

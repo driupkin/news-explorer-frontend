@@ -37,7 +37,6 @@ function Signin(props) {
             onClose={props.onClose}
             isValid={isValid}
             onSubmit={handleSubmit}
-            // onChangeData={props.handleSignin}
             openPopapSign={props.openPopapSign}
             errorMessageInvalid={props.errorMessageInvalid}
         >

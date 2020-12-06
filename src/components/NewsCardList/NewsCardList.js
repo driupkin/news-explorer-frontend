@@ -21,14 +21,26 @@ function NewsCardList(props) {
                 ? <section className={`elements ${props.isSevedNews ? 'elements_nopadding' : ''}`}>
                     {props.children}
                     <div className="elements__container">
-                        {showByThreeCards(countCards).map((card, i) => (
-                            <NewsCard
-                                isAuthorized={props.isAuthorized}
-                                isSevedNews={props.isSevedNews}
-                                card={card}
-                                key={i}
-                            />
-                        ))}
+                        {props.isSevedNews
+                            ? props.cards.map((card, i) => (
+                                <NewsCard
+                                    onCardIconClick={props.onCardIconClick}
+                                    isAuthorized={props.isAuthorized}
+                                    isSevedNews={props.isSevedNews}
+                                    card={card}
+                                    key={i}
+                                />
+                            ))
+                            : showByThreeCards(countCards).map((card, i) => (
+                                <NewsCard
+                                    onCardIconClick={props.onCardIconClick}
+                                    isAuthorized={props.isAuthorized}
+                                    isSevedNews={props.isSevedNews}
+                                    card={card}
+                                    key={i}
+                                />
+                            ))
+                        }
                     </div>
                     <button
                         onClick={() => setCountCards(countCards + 3)}

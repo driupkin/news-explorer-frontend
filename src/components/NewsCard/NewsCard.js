@@ -7,11 +7,12 @@ function NewsCard(props) {
     const [onHover, setOnHover] = useState();
     const [isFavor, setIsFavor] = useState(false);
     // вр`еменная функция проверки сохранения карточки
-    function addFavor() {
+    function handelIconClick() {
         if (isFavor) {
             setIsFavor(false);
         } else {
             setIsFavor(true);
+            props.onCardIconClick(props.card);
         }
     }
     // перевод даты в формат по макету
@@ -32,7 +33,7 @@ function NewsCard(props) {
                 <button
                     type='button'
                     name='icon'
-                    onClick={addFavor}
+                    onClick={handelIconClick}
                     onMouseOut={() => setOnHover(false)}
                     onMouseOver={() => setOnHover(true)}
                     className={`card__icon 

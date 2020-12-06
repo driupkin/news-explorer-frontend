@@ -39,7 +39,7 @@ function Signup(props) {
             onClose={props.onClose}
             isValid={isValid}
             onSubmit={handleSubmit}
-            // onChangeData={props.handleSignup}
+            errorMessageInvalid={props.errorMessageInvalid}
             openPopapSign={props.openPopapSign}
         >
             <h2 className="form__title">Email</h2>
