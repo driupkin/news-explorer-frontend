@@ -26,7 +26,7 @@ function NewsCard(props) {
             </div>
             <div className="card__icon-container">
                 <h3
-                    className={`card__popup ${(!props.isAuthorized && onHover) ? 'card__popup_opened' : ''}`}
+                    className={`card__popup ${((!props.isAuthorized || props.isSevedNews) && onHover) ? 'card__popup_opened' : ''}`}
                 >{props.isSevedNews ? 'Убрать из сохранённых' : 'Войдите, чтобы сохранять статьи'}</h3>
                 <button
                     type='button'

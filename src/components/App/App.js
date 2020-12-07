@@ -93,7 +93,6 @@ function App() {
         if (foundCards.length === 0) {
           setNotFound(true);
           setOpenCards(false);
-          // Возможно нужен выход в catch
         }
         console.log(foundCards);
         localStorage.setItem('articles', JSON.stringify(foundCards));
@@ -264,7 +263,9 @@ function App() {
               </Route>
               <ProtectedRoute exact path="/saved-news"
                 component={SavedNewsPage}
-                isAuthorized={isAuthorized}>
+                isPopapOpen={() => setIsLoginPopupOpen(true)}
+                isAuthorized={isAuthorized}
+              >
                 <Header
                   openPopapSign={() => setIsLoginPopupOpen(true)}
                   buttonName={HeaderButtonName}
@@ -280,7 +281,6 @@ function App() {
                 />
               </ProtectedRoute>
             </Switch>
-
             <Signin
               onClose={closeAllPopups}
               isOpen={isLoginPopupOpen}

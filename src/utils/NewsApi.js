@@ -1,9 +1,12 @@
 export const getNews = (keyWord) => {
     const nowDate = new Date();
+    const date = new Date();
+    date.setDate(date.getDate() - 7);
+
     return fetch('https://newsapi.org/v2/everything?' +
         `q=${keyWord}&` +
         'pageSize=100&' +
-        'from=2020-12-01&' +
+        `from=${date}&` +
         `to=${nowDate}`,
         {
             method: 'GET',
