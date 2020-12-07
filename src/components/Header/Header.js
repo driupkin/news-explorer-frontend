@@ -48,7 +48,6 @@ function Header(props) {
                     {props.isAuthorized
                         ? <a
                             href='/saved-news'
-                            // to="/saved-news"
                             className={
                                 `header__link 
                         ${props.isSevedNews

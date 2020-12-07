@@ -37,9 +37,7 @@ function App() {
   const [isPreloderOpen, setIsPreloderOpen] = useState();
   const [openCards, setOpenCards] = useState(false);
   const [notFound, setNotFound] = useState(false);
-  const [isSevedNews, setIsSevedNews] = useState(false);
-  const [isFavor, setIsFavor] = useState(false);
-  const [currentUser, setCurrentUser] = React.useState({
+  const [currentUser, setCurrentUser] = useState({
     email: '',
     name: ''
   });
@@ -84,10 +82,6 @@ function App() {
     setInfoTooltipOpen(false);
   }
 
-  function addFavorite(cards) {
-
-  }
-
   // поиск новостей
   function searchCards(keyWord) {
     NewsApi.getNews(keyWord)
@@ -108,6 +102,9 @@ function App() {
         setOpenCards(true);
         return setFoundCards(foundCards);
       })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   function handleSearch(keyWord) {
@@ -205,13 +202,18 @@ function App() {
   }
   // сохранение и удаление карточек
   function handleCardIconClick(card) {
-    if (card.url === sevedCards.url) {
+    if (sevedCards.some(i => i.url === card.url)) { // удаляем
+      const newCards = sevedCards.filter(i => i.url === card.url);
+      handleDelCard(newCards[0]);
+    } else { // сохраняем
       const keyWord = localStorage.getItem('keyWord');
       MainApi.addCard(card, keyWord, tokenCheck(), 'articles')
-        .then()
-    } else {
-      MainApi.deleteCard(tokenCheck(), 'articles', card._id)
-        .then()
+        .then(() => {
+          getAllContent();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 
@@ -221,6 +223,9 @@ function App() {
         const newCards = sevedCards.filter(item => item._id === card._id ? '' : item);
         setSevedCards(newCards);
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function openPopapSign() {

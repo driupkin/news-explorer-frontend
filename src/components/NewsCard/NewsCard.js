@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment/min/moment-with-locales';
 import { CardsContext } from '../../context/CardsContext';
 import './NewsCard.css';
