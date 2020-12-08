@@ -45,7 +45,6 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    setOpenCards(true);
     const articles = localStorage.getItem('articles')
     if (articles) {
       setOpenCards(true);
@@ -198,6 +197,8 @@ function App() {
 
   function signOut() {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('articles');
+    localStorage.removeItem('keyWord');
     history.push('/');
     setHeaderButtonName('Авторизоваться');
     setIsAuthorized(false);
