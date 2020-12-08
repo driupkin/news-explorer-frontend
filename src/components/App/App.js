@@ -44,11 +44,14 @@ function App() {
 
   const history = useHistory();
 
-  // useEffect(() => {
-  //   setOpenCards(true);
-  //   const articles = localStorage.getItem('articles')
-  //   setFoundCards(JSON.parse(articles));
-  // }, []);
+  useEffect(() => {
+    setOpenCards(true);
+    const articles = localStorage.getItem('articles')
+    if (articles) {
+      setOpenCards(true);
+      setFoundCards(JSON.parse(articles));
+    }
+  }, []);
 
   useEffect(() => {
     if (tokenCheck()) {
