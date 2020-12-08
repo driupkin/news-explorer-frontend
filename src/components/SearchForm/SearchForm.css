@@ -96,7 +96,7 @@
     background: #347EFF;
 }
 
-.search__button:focus {
+.search__button:active {
     background: #2A65CC;
 }
 

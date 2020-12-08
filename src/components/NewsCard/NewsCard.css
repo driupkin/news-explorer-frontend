@@ -137,6 +137,10 @@
 }
 
 .card__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     font-family: Roboto Slab;
     font-style: normal;
     font-weight: normal;
