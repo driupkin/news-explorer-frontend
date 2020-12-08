@@ -31,7 +31,7 @@ function App() {
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
   const [HeaderButtonName, setHeaderButtonName] = useState('Авторизоваться');
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(localStorage.getItem('jwt') ? true : false);
   const [foundCards, setFoundCards] = useState([]);
   const [sevedCards, setSevedCards] = useState([]);
   const [isPreloderOpen, setIsPreloderOpen] = useState();
@@ -144,7 +144,7 @@ function App() {
     MainApi.authorize(email, password)
       .then(data => {
         if (data.token) {
-          getCurrentUser();
+          getAllContent();
           setIsAuthorized(true);
           closeAllPopups();
         }
@@ -208,7 +208,7 @@ function App() {
       const newCards = sevedCards.filter(i => i.url === card.url);
       handleDelCard(newCards[0]);
     } else { // сохраняем
-      const keyWord = localStorage.getItem('keyWord'); console.log(keyWord);
+      const keyWord = localStorage.getItem('keyWord');
       MainApi.addCard(card, keyWord, tokenCheck(), 'articles')
         .then(() => {
           getAllContent();
