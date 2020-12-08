@@ -208,7 +208,7 @@ function App() {
       const newCards = sevedCards.filter(i => i.url === card.url);
       handleDelCard(newCards[0]);
     } else { // сохраняем
-      const keyWord = localStorage.getItem('keyWord');
+      const keyWord = localStorage.getItem('keyWord'); console.log(keyWord);
       MainApi.addCard(card, keyWord, tokenCheck(), 'articles')
         .then(() => {
           getAllContent();
@@ -264,7 +264,7 @@ function App() {
                   onCardIconClick={handleCardIconClick}
                 />
               </Route>
-              <ProtectedRoute exact path="/saved-news"
+              <ProtectedRoute path="/saved-news"
                 component={SavedNewsPage}
                 isPopapOpen={() => setIsLoginPopupOpen(true)}
                 isAuthorized={isAuthorized}

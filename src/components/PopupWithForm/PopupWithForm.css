@@ -178,6 +178,8 @@
 }
 
 .form__input-error {
+    display: flex;
+    text-align: center;
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
