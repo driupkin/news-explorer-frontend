@@ -7,8 +7,8 @@ export const getNews = (keyWord) => {
         `q=${keyWord}&` +
         'apiKey=40ee307534d44f7698c25b0bafa4f7ed&' +
         'pageSize=100&' +
-        `from=${date}&` +
-        `to=${nowDate}`,
+        `from=${date.toISOString()}&` +
+        `to=${nowDate.toISOString()}`,
         {
             method: 'GET'
         })

@@ -1,5 +1,5 @@
 export const BASE_URL = 'https://api.ned.students.nomoreparties.co';
-// export const BASE_URL = 'http://localhost:3000'
+
 function handleResponse(res) {
     if (res.ok) {
         return res.json();

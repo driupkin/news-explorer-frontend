@@ -46,14 +46,14 @@ function Header(props) {
                             : 'header__link_undeline'}`
                         }>Главная</Link>
                     {props.isAuthorized
-                        ? <Link
-                            to='/saved-news'
+                        ? <a
+                            href='/saved-news'
                             className={
                                 `header__link 
                         ${props.isSevedNews
                                     ? 'header__link_theme_white header__link_undeline'
                                     : ''}`
-                            }>Сохранённые статьи</Link>
+                            }>Сохранённые статьи</a>
                         : ''}
                     <button
                         className={`header__button ${props.isSevedNews
