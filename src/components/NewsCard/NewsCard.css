@@ -1,0 +1,216 @@
+.card {
+    position: relative;
+    height: 576px;
+    width: 400px;
+    border-radius: 16px;
+    background: #FFFFFF;
+}
+
+.card__key-word-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 40px;
+    left: 24px;
+    top: 24px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: #000000;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.card__key-word-container_opened {
+    display: flex;
+}
+
+.card__key-word {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card__icon-container {
+    display: flex;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    height: 40px;
+}
+
+.card__popup {
+    visibility: hidden;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
+    border-radius: 10px;
+    height: 40px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin: 0 5px 0 0;
+    opacity: 0;
+    transition: all 0.3s linear;
+}
+
+.card__popup_opened {
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.3s linear;
+}
+
+.card__icon {
+    height: 40px;
+    width: 40px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: center no-repeat #FFFFFF;
+    border-radius: 8px;
+    transition: background 0.3s linear;
+}
+
+.card__fevor-icon {
+    background-image: url('../../images/icon/add-fav.svg');
+}
+
+.card__fevor-icon:hover {
+    background-image: url('../../images/icon/add-fav-black.svg');
+}
+
+.card__fevor-icon_active {
+    background-image: url('../../images/icon/add-fav-active.svg');
+}
+
+.card__trash-icon {
+    background-image: url('../../images/icon/trash.svg');
+}
+
+.card__trash-icon:hover {
+    background-image: url('../../images/icon/trash-black.svg');
+}
+
+.card__image {
+    height: 272px;
+    width: 400px;
+    border-radius: 16px 16px 0 0;
+}
+
+.card__text {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px 24px;
+    box-sizing: border-box;
+    height: calc(576px - 272px);
+}
+
+.card__date {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #B6BCBF;
+}
+
+.card__title {
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 30px;
+    color: #1A1B22;
+    margin: 0;
+    margin-top: 12px;
+}
+
+.card__paragraph {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #1A1B22;
+    margin: 0;
+    margin-top: 16px;
+    width: 352px;
+    height: 88px;
+    overflow: hidden;
+}
+
+.card__subtitle {
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #B6BCBF;
+    margin: 0;
+    margin-top: auto;
+}
+
+@media screen and (max-width: 900px) {
+    .card {
+        height: 420px;
+        width: 224px;
+    }
+    .card__image {
+        height: 150px;
+        width: 224px;
+    }
+    .card__title {
+        font-size: 22px;
+        line-height: 24px;
+    }
+    .card__paragraph {
+        margin-top: 10px;
+        width: 192px;
+    }
+    .card__text {
+        height: 270px;
+        padding: 16px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .card {
+        height: 446px;
+        width: 288px;
+    }
+    .card__image {
+        height: 196px;
+        width: 288px;
+    }
+    .card__title {
+        line-height: 28px;
+    }
+    .card__paragraph {
+        width: 256px;
+    }
+    .card__subtitle {
+        margin-top: 8px;
+    }
+}

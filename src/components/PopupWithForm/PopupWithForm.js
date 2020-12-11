@@ -1,0 +1,48 @@
+import React from 'react';
+import './PopupWithForm.css';
+
+function PopupWithForm(props) {
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        props.onChangeData();
+    }
+
+    function handelOpenPopap() {
+        props.openPopapSign();
+    }
+
+    return (
+        <section className={`popup ${props.isOpen ? 'popup_opened' : ''}`}>
+            <div className="popup__container">
+                <button
+                    className="popup__button"
+                    onClick={props.onClose}
+                />
+                <h2 className="popup__title">{props.title}</h2>
+                <form className="form" onSubmit={handleSubmit}>
+                    <fieldset className="form__field">
+                        <div className="form__input-container">
+                            {props.children}
+                        </div>
+                    </fieldset>
+                    <button className={`form__button form__button_${props.modName}
+                    ${props.isValid 
+                    ? '' 
+                    : 'form__button_inactive'}`}>{props.buttonName}</button>
+                </form>
+                <div className={`popup__subtitle-container popup__subtitle-container_${props.modName}`}>
+                    <p className={`popup__subtitle popup__subtitle_${props.modName}`}>или&ensp;</p>
+                    <button
+                        className={`popup__link popup__link_${props.modName}`}
+                        // href={props.link}
+                        onClick={handelOpenPopap}
+                    >{props.linkName}</button>
+                </div>
+            </div>
+        </section>
+
+    );
+}
+
+export default PopupWithForm;

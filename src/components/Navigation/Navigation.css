@@ -1,0 +1,29 @@
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+    .navigation {
+        flex-direction: row;
+        width: 100%;
+        align-items: flex-start;
+    }
+    .navigation_header {
+        display: flex;
+        visibility: hidden;
+        flex-direction: column;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        opacity: 0;
+    }
+    .navigation_header_opened {
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.3s linear;
+    }
+}
